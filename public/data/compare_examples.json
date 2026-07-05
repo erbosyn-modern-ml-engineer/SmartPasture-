@@ -1,0 +1,442 @@
+﻿{
+  "implementation_steps": [
+    {
+      "title": "Соберите данные",
+      "body": "Запросите глубины и паспорта скважин по району, затем проверьте минерализацию и дебит."
+    },
+    {
+      "title": "Введите в SmartPasture",
+      "body": "Заполните калькулятор: глубина, TDS, зона, напор и состав стада."
+    },
+    {
+      "title": "Получите оценку HPS",
+      "body": "HPS > 0.7 — сильный кандидат. HPS 0.4–0.7 — нужен дополнительный экспертный просмотр. Ниже 0.4 — точка слабая."
+    },
+    {
+      "title": "Проверьте экономику",
+      "body": "Сравните стоимость бурения, охват стада и риск сухой скважины перед выездом в поле."
+    },
+    {
+      "title": "Контролируйте качество",
+      "body": "После бурения обязательно лабораторно проверить воду, а не верить только модели."
+    }
+  ],
+  "compare_examples": [
+    {
+      "id": "pilot_best_vs_validation",
+      "title": "Пилот: Каратау vs Мерке",
+      "left": {
+        "site_id": 1,
+        "title": "Каратау",
+        "district": "Таласский район",
+        "priority_band": "Высокий приоритет",
+        "action": "Инспекция в первую очередь",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.92,
+            "color": "#22C55E"
+          },
+          {
+            "label": "PNS",
+            "value": 0.76,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.08,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.9,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "INSPECT_FIRST"
+      },
+      "right": {
+        "site_id": 5,
+        "title": "Мерке",
+        "district": "Меркенский район",
+        "priority_band": "Средний приоритет",
+        "action": "Быстрая верификация",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.91,
+            "color": "#22C55E"
+          },
+          {
+            "label": "PNS",
+            "value": 0.7,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.11,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.86,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "INSPECT_WITH_QUICK_VERIFICATION"
+      },
+      "winner": "left",
+      "why_wins": [
+        "Выше итоговый приоритет проверки при том же формате решения-support.",
+        "Ниже риск: меньше вероятность, что красивый score маскирует слабые входные данные.",
+        "Выше confidence: сигналы выглядят устойчивее и лучше поддержаны данными."
+      ],
+      "differences": [
+        {
+          "label": "HPS",
+          "left": 0.92,
+          "right": 0.91,
+          "winner": "left"
+        },
+        {
+          "label": "PNS",
+          "left": 0.76,
+          "right": 0.7,
+          "winner": "left"
+        },
+        {
+          "label": "Risk",
+          "left": 0.08,
+          "right": 0.11,
+          "winner": "left"
+        },
+        {
+          "label": "Confidence",
+          "left": 0.9,
+          "right": 0.86,
+          "winner": "left"
+        }
+      ],
+      "human_review_needed": false,
+      "next_step_difference": "Каратау: Инспекция в первую очередь. Мерке: Быстрая верификация."
+    },
+    {
+      "id": "pilot_validation_vs_risky",
+      "title": "Пилот: Мерке vs Сарысу / Жанатас",
+      "left": {
+        "site_id": 5,
+        "title": "Мерке",
+        "district": "Меркенский район",
+        "priority_band": "Средний приоритет",
+        "action": "Быстрая верификация",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.91,
+            "color": "#22C55E"
+          },
+          {
+            "label": "PNS",
+            "value": 0.7,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.11,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.86,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "INSPECT_WITH_QUICK_VERIFICATION"
+      },
+      "right": {
+        "site_id": 10,
+        "title": "Сарысу / Жанатас",
+        "district": "Сарысуский район",
+        "priority_band": "Низкий приоритет",
+        "action": "Не рекомендуется по текущим данным",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.15,
+            "color": "#EF4444"
+          },
+          {
+            "label": "PNS",
+            "value": 0.47,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.74,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.45,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "NOT_RECOMMENDED_CURRENT_EVIDENCE"
+      },
+      "winner": "left",
+      "why_wins": [
+        "Выше итоговый приоритет проверки при том же формате решения-support.",
+        "Ниже риск: меньше вероятность, что красивый score маскирует слабые входные данные.",
+        "Выше confidence: сигналы выглядят устойчивее и лучше поддержаны данными."
+      ],
+      "differences": [
+        {
+          "label": "HPS",
+          "left": 0.91,
+          "right": 0.15,
+          "winner": "left"
+        },
+        {
+          "label": "PNS",
+          "left": 0.7,
+          "right": 0.47,
+          "winner": "left"
+        },
+        {
+          "label": "Risk",
+          "left": 0.11,
+          "right": 0.74,
+          "winner": "left"
+        },
+        {
+          "label": "Confidence",
+          "left": 0.86,
+          "right": 0.45,
+          "winner": "left"
+        }
+      ],
+      "human_review_needed": false,
+      "next_step_difference": "Мерке: Быстрая верификация. Сарысу / Жанатас: Не рекомендуется по текущим данным."
+    }
+  ],
+  "steps": [
+    {
+      "title": "Соберите данные",
+      "body": "Запросите глубины и паспорта скважин по району, затем проверьте минерализацию и дебит."
+    },
+    {
+      "title": "Введите в SmartPasture",
+      "body": "Заполните калькулятор: глубина, TDS, зона, напор и состав стада."
+    },
+    {
+      "title": "Получите оценку HPS",
+      "body": "HPS > 0.7 — сильный кандидат. HPS 0.4–0.7 — нужен дополнительный экспертный просмотр. Ниже 0.4 — точка слабая."
+    },
+    {
+      "title": "Проверьте экономику",
+      "body": "Сравните стоимость бурения, охват стада и риск сухой скважины перед выездом в поле."
+    },
+    {
+      "title": "Контролируйте качество",
+      "body": "После бурения обязательно лабораторно проверить воду, а не верить только модели."
+    }
+  ],
+  "examples": [
+    {
+      "id": "pilot_best_vs_validation",
+      "title": "Пилот: Каратау vs Мерке",
+      "left": {
+        "site_id": 1,
+        "title": "Каратау",
+        "district": "Таласский район",
+        "priority_band": "Высокий приоритет",
+        "action": "Инспекция в первую очередь",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.92,
+            "color": "#22C55E"
+          },
+          {
+            "label": "PNS",
+            "value": 0.76,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.08,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.9,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "INSPECT_FIRST"
+      },
+      "right": {
+        "site_id": 5,
+        "title": "Мерке",
+        "district": "Меркенский район",
+        "priority_band": "Средний приоритет",
+        "action": "Быстрая верификация",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.91,
+            "color": "#22C55E"
+          },
+          {
+            "label": "PNS",
+            "value": 0.7,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.11,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.86,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "INSPECT_WITH_QUICK_VERIFICATION"
+      },
+      "winner": "left",
+      "why_wins": [
+        "Выше итоговый приоритет проверки при том же формате решения-support.",
+        "Ниже риск: меньше вероятность, что красивый score маскирует слабые входные данные.",
+        "Выше confidence: сигналы выглядят устойчивее и лучше поддержаны данными."
+      ],
+      "differences": [
+        {
+          "label": "HPS",
+          "left": 0.92,
+          "right": 0.91,
+          "winner": "left"
+        },
+        {
+          "label": "PNS",
+          "left": 0.76,
+          "right": 0.7,
+          "winner": "left"
+        },
+        {
+          "label": "Risk",
+          "left": 0.08,
+          "right": 0.11,
+          "winner": "left"
+        },
+        {
+          "label": "Confidence",
+          "left": 0.9,
+          "right": 0.86,
+          "winner": "left"
+        }
+      ],
+      "human_review_needed": false,
+      "next_step_difference": "Каратау: Инспекция в первую очередь. Мерке: Быстрая верификация."
+    },
+    {
+      "id": "pilot_validation_vs_risky",
+      "title": "Пилот: Мерке vs Сарысу / Жанатас",
+      "left": {
+        "site_id": 5,
+        "title": "Мерке",
+        "district": "Меркенский район",
+        "priority_band": "Средний приоритет",
+        "action": "Быстрая верификация",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.91,
+            "color": "#22C55E"
+          },
+          {
+            "label": "PNS",
+            "value": 0.7,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.11,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.86,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "INSPECT_WITH_QUICK_VERIFICATION"
+      },
+      "right": {
+        "site_id": 10,
+        "title": "Сарысу / Жанатас",
+        "district": "Сарысуский район",
+        "priority_band": "Низкий приоритет",
+        "action": "Не рекомендуется по текущим данным",
+        "metrics": [
+          {
+            "label": "HPS",
+            "value": 0.15,
+            "color": "#EF4444"
+          },
+          {
+            "label": "PNS",
+            "value": 0.47,
+            "color": "#1E3A8A"
+          },
+          {
+            "label": "Risk",
+            "value": 0.74,
+            "color": "#EF4444"
+          },
+          {
+            "label": "Confidence",
+            "value": 0.45,
+            "color": "#0891B2"
+          }
+        ],
+        "action_id": "NOT_RECOMMENDED_CURRENT_EVIDENCE"
+      },
+      "winner": "left",
+      "why_wins": [
+        "Выше итоговый приоритет проверки при том же формате решения-support.",
+        "Ниже риск: меньше вероятность, что красивый score маскирует слабые входные данные.",
+        "Выше confidence: сигналы выглядят устойчивее и лучше поддержаны данными."
+      ],
+      "differences": [
+        {
+          "label": "HPS",
+          "left": 0.91,
+          "right": 0.15,
+          "winner": "left"
+        },
+        {
+          "label": "PNS",
+          "left": 0.7,
+          "right": 0.47,
+          "winner": "left"
+        },
+        {
+          "label": "Risk",
+          "left": 0.11,
+          "right": 0.74,
+          "winner": "left"
+        },
+        {
+          "label": "Confidence",
+          "left": 0.86,
+          "right": 0.45,
+          "winner": "left"
+        }
+      ],
+      "human_review_needed": false,
+      "next_step_difference": "Мерке: Быстрая верификация. Сарысу / Жанатас: Не рекомендуется по текущим данным."
+    }
+  ]
+}

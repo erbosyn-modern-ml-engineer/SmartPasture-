@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://smartpasture.example.com/</loc></url>
+  <url><loc>https://smartpasture.example.com/map</loc></url>
+  <url><loc>https://smartpasture.example.com/compare</loc></url>
+  <url><loc>https://smartpasture.example.com/scenarios</loc></url>
+  <url><loc>https://smartpasture.example.com/methodology</loc></url>
+  <url><loc>https://smartpasture.example.com/demo</loc></url>
+</urlset>

@@ -1,0 +1,1547 @@
+{
+  "version": "classic-ml-v2-feature-engineered",
+  "trainedAt": "2026-06-02",
+  "audience": "hydrogeological_services",
+  "modelType": "GaussianNaiveBayes",
+  "target": "success",
+  "thresholds": {
+    "likely": 0.62,
+    "unlikely": 0.42
+  },
+  "features": [
+    "slope_deg",
+    "curvature",
+    "flow_accumulation",
+    "twi",
+    "elevation_m",
+    "dist_to_river_m",
+    "dist_to_lake_m",
+    "dist_to_canal_m",
+    "drainage_density_5km",
+    "annual_precip_mm",
+    "spring_precip_mm",
+    "summer_precip_mm",
+    "dry_months_count",
+    "pet_mm",
+    "aet_mm",
+    "aridity_index",
+    "water_deficit_mm",
+    "annual_temp_c",
+    "summer_temp_c",
+    "ndvi_mean_growing_season",
+    "ndvi_summer_min",
+    "ndvi_anomaly",
+    "vegetation_stability",
+    "is_pasture",
+    "pasture_area_5km",
+    "grazing_pressure_proxy",
+    "sand_pct",
+    "clay_pct",
+    "silt_pct",
+    "organic_carbon",
+    "bulk_density",
+    "soil_water_capacity_proxy",
+    "aquifer_proxy",
+    "permeability_proxy",
+    "carbonate_flag",
+    "alluvial_flag",
+    "dist_to_fault_m",
+    "fault_density_10km",
+    "near_fault_flag",
+    "dist_to_road_m",
+    "dist_to_settlement_m",
+    "nearest_water_type_enc",
+    "land_cover_class_enc",
+    "soil_texture_class_enc",
+    "lithology_class_enc",
+    "geological_age_enc",
+    "nearest_surface_water_m",
+    "log_nearest_surface_water_m",
+    "log_flow_accumulation",
+    "log_dist_to_fault_m",
+    "water_balance_mm",
+    "soil_infiltration_index",
+    "geology_water_index",
+    "vegetation_moisture_index",
+    "access_cost_index",
+    "aridity_pressure_index"
+  ],
+  "engineeredFeatures": [
+    "nearest_surface_water_m",
+    "log_nearest_surface_water_m",
+    "log_flow_accumulation",
+    "log_dist_to_fault_m",
+    "water_balance_mm",
+    "soil_infiltration_index",
+    "geology_water_index",
+    "vegetation_moisture_index",
+    "access_cost_index",
+    "aridity_pressure_index"
+  ],
+  "featureLabels": {
+    "slope_deg": "Уклон рельефа",
+    "curvature": "Кривизна поверхности",
+    "flow_accumulation": "Накопление стока",
+    "twi": "Topographic Wetness Index",
+    "elevation_m": "Высота точки",
+    "dist_to_river_m": "Расстояние до реки",
+    "dist_to_lake_m": "Расстояние до озера",
+    "dist_to_canal_m": "Расстояние до канала",
+    "drainage_density_5km": "Плотность дренажной сети",
+    "annual_precip_mm": "Годовые осадки",
+    "spring_precip_mm": "Весенние осадки",
+    "summer_precip_mm": "Летние осадки",
+    "dry_months_count": "Сухие месяцы",
+    "pet_mm": "Потенциальная испаряемость",
+    "aet_mm": "Фактическая испаряемость",
+    "aridity_index": "Индекс засушливости",
+    "water_deficit_mm": "Дефицит влаги",
+    "annual_temp_c": "Среднегодовая температура",
+    "summer_temp_c": "Летняя температура",
+    "ndvi_mean_growing_season": "NDVI за сезон роста",
+    "ndvi_summer_min": "Минимальный летний NDVI",
+    "ndvi_anomaly": "Аномалия NDVI",
+    "vegetation_stability": "Стабильность растительности",
+    "is_pasture": "Пастбищный/степной контекст",
+    "pasture_area_5km": "Площадь пастбищ вокруг",
+    "grazing_pressure_proxy": "Прокси пастбищной нагрузки",
+    "sand_pct": "Доля песка",
+    "clay_pct": "Доля глины",
+    "silt_pct": "Доля ила",
+    "organic_carbon": "Органический углерод",
+    "bulk_density": "Плотность почвы",
+    "soil_water_capacity_proxy": "Водоудерживающая способность почвы",
+    "aquifer_proxy": "Прокси водоносного потенциала",
+    "permeability_proxy": "Прокси проницаемости пород",
+    "carbonate_flag": "Карбонатные породы",
+    "alluvial_flag": "Аллювиальные отложения",
+    "dist_to_fault_m": "Расстояние до разлома",
+    "fault_density_10km": "Плотность разломов",
+    "near_fault_flag": "Разлом рядом",
+    "dist_to_road_m": "Расстояние до дороги",
+    "dist_to_settlement_m": "Расстояние до населенного пункта",
+    "nearest_water_type_enc": "Тип ближайшей воды",
+    "land_cover_class_enc": "Тип покрытия земли",
+    "soil_texture_class_enc": "Тип почвы",
+    "lithology_class_enc": "Литология",
+    "geological_age_enc": "Геологический возраст",
+    "nearest_surface_water_m": "Ближайшая поверхностная вода",
+    "log_nearest_surface_water_m": "Лог-дистанция до воды",
+    "log_flow_accumulation": "Лог-накопление стока",
+    "log_dist_to_fault_m": "Лог-дистанция до разлома",
+    "water_balance_mm": "Водный баланс",
+    "soil_infiltration_index": "Индекс инфильтрации почвы",
+    "geology_water_index": "Геологический водный индекс",
+    "vegetation_moisture_index": "Индекс влажности по растительности",
+    "access_cost_index": "Индекс стоимости доступа",
+    "aridity_pressure_index": "Индекс аридного давления"
+  },
+  "featureGroups": {
+    "slope_deg": "Рельеф",
+    "curvature": "Рельеф",
+    "flow_accumulation": "Рельеф",
+    "twi": "Рельеф",
+    "elevation_m": "Рельеф",
+    "dist_to_river_m": "Вода",
+    "dist_to_lake_m": "Вода",
+    "dist_to_canal_m": "Вода",
+    "drainage_density_5km": "Вода",
+    "annual_precip_mm": "Климат",
+    "spring_precip_mm": "Климат",
+    "summer_precip_mm": "Климат",
+    "dry_months_count": "Климат",
+    "pet_mm": "Климат",
+    "aet_mm": "Климат",
+    "aridity_index": "Климат",
+    "water_deficit_mm": "Климат",
+    "annual_temp_c": "Климат",
+    "summer_temp_c": "Климат",
+    "ndvi_mean_growing_season": "Растительность",
+    "ndvi_summer_min": "Растительность",
+    "ndvi_anomaly": "Растительность",
+    "vegetation_stability": "Растительность",
+    "is_pasture": "Растительность",
+    "pasture_area_5km": "Растительность",
+    "grazing_pressure_proxy": "Растительность",
+    "sand_pct": "Почвы",
+    "clay_pct": "Почвы",
+    "silt_pct": "Почвы",
+    "organic_carbon": "Почвы",
+    "bulk_density": "Почвы",
+    "soil_water_capacity_proxy": "Почвы",
+    "aquifer_proxy": "Геология",
+    "permeability_proxy": "Геология",
+    "carbonate_flag": "Геология",
+    "alluvial_flag": "Геология",
+    "dist_to_fault_m": "Геология",
+    "fault_density_10km": "Геология",
+    "near_fault_flag": "Геология",
+    "dist_to_road_m": "Доступность",
+    "dist_to_settlement_m": "Доступность",
+    "nearest_water_type_enc": "Прочее",
+    "land_cover_class_enc": "Растительность",
+    "soil_texture_class_enc": "Почвы",
+    "lithology_class_enc": "Геология",
+    "geological_age_enc": "Геология",
+    "nearest_surface_water_m": "Вода",
+    "log_nearest_surface_water_m": "Вода",
+    "log_flow_accumulation": "Рельеф",
+    "log_dist_to_fault_m": "Геология",
+    "water_balance_mm": "Климат",
+    "soil_infiltration_index": "Почвы",
+    "geology_water_index": "Геология",
+    "vegetation_moisture_index": "Растительность",
+    "access_cost_index": "Доступность",
+    "aridity_pressure_index": "Климат"
+  },
+  "featureStats": {
+    "slope_deg": {
+      "mean": 3.83557143,
+      "std": 3.56918864
+    },
+    "curvature": {
+      "mean": -0.00054071,
+      "std": 0.00451317
+    },
+    "flow_accumulation": {
+      "mean": 1368.55714286,
+      "std": 2285.64897715
+    },
+    "twi": {
+      "mean": 9.114,
+      "std": 1.63973858
+    },
+    "elevation_m": {
+      "mean": 328.05142857,
+      "std": 207.35249748
+    },
+    "dist_to_river_m": {
+      "mean": 114435.41428571,
+      "std": 112215.8090736
+    },
+    "dist_to_lake_m": {
+      "mean": 375461.08571429,
+      "std": 175614.52511255
+    },
+    "dist_to_canal_m": {
+      "mean": 253139.78571429,
+      "std": 189998.94216532
+    },
+    "drainage_density_5km": {
+      "mean": 0.27927143,
+      "std": 0.1773198
+    },
+    "annual_precip_mm": {
+      "mean": 219.82428571,
+      "std": 67.22511103
+    },
+    "spring_precip_mm": {
+      "mean": 67.15,
+      "std": 23.30282478
+    },
+    "summer_precip_mm": {
+      "mean": 43.16857143,
+      "std": 14.43067707
+    },
+    "dry_months_count": {
+      "mean": 4.92857143,
+      "std": 1.43747227
+    },
+    "pet_mm": {
+      "mean": 600.92571429,
+      "std": 75.29675706
+    },
+    "aet_mm": {
+      "mean": 175.77857143,
+      "std": 61.73872342
+    },
+    "aridity_index": {
+      "mean": 0.36872857,
+      "std": 0.11284337
+    },
+    "water_deficit_mm": {
+      "mean": 381.10142857,
+      "std": 93.07371501
+    },
+    "annual_temp_c": {
+      "mean": 11.07142857,
+      "std": 1.58980168
+    },
+    "summer_temp_c": {
+      "mean": 29.34857143,
+      "std": 2.07273063
+    },
+    "ndvi_mean_growing_season": {
+      "mean": 0.25624286,
+      "std": 0.07289806
+    },
+    "ndvi_summer_min": {
+      "mean": 0.17407143,
+      "std": 0.05192999
+    },
+    "ndvi_anomaly": {
+      "mean": 0.00056429,
+      "std": 0.0290998
+    },
+    "vegetation_stability": {
+      "mean": 0.90018571,
+      "std": 0.09253467
+    },
+    "is_pasture": {
+      "mean": 0.82857143,
+      "std": 0.37688303
+    },
+    "pasture_area_5km": {
+      "mean": 0.46107143,
+      "std": 0.23308817
+    },
+    "grazing_pressure_proxy": {
+      "mean": 0.54764286,
+      "std": 0.26780937
+    },
+    "sand_pct": {
+      "mean": 49.70428571,
+      "std": 9.59324816
+    },
+    "clay_pct": {
+      "mean": 22.19714286,
+      "std": 6.04816316
+    },
+    "silt_pct": {
+      "mean": 28.09857143,
+      "std": 5.96581914
+    },
+    "organic_carbon": {
+      "mean": 1.33728571,
+      "std": 0.63171404
+    },
+    "bulk_density": {
+      "mean": 1.46257143,
+      "std": 0.14597148
+    },
+    "soil_water_capacity_proxy": {
+      "mean": 0.33154286,
+      "std": 0.04207194
+    },
+    "aquifer_proxy": {
+      "mean": 0.64171429,
+      "std": 0.18976852
+    },
+    "permeability_proxy": {
+      "mean": 0.53251429,
+      "std": 0.203985
+    },
+    "carbonate_flag": {
+      "mean": 0.17142857,
+      "std": 0.37688303
+    },
+    "alluvial_flag": {
+      "mean": 0.62857143,
+      "std": 0.4831867
+    },
+    "dist_to_fault_m": {
+      "mean": 155877.41428571,
+      "std": 112964.79154061
+    },
+    "fault_density_10km": {
+      "mean": 0.25658857,
+      "std": 0.13967443
+    },
+    "near_fault_flag": {
+      "mean": 0.01428571,
+      "std": 0.11866606
+    },
+    "dist_to_road_m": {
+      "mean": 133194.35714286,
+      "std": 79260.85798985
+    },
+    "dist_to_settlement_m": {
+      "mean": 100051.17142857,
+      "std": 64789.0437724
+    },
+    "nearest_water_type_enc": {
+      "mean": 1.54285714,
+      "std": 0.74996599
+    },
+    "land_cover_class_enc": {
+      "mean": 1.97142857,
+      "std": 0.60877931
+    },
+    "soil_texture_class_enc": {
+      "mean": 1.45714286,
+      "std": 0.85666653
+    },
+    "lithology_class_enc": {
+      "mean": 2.2,
+      "std": 2.32132967
+    },
+    "geological_age_enc": {
+      "mean": 3.38571429,
+      "std": 2.01631104
+    },
+    "nearest_surface_water_m": {
+      "mean": 60485.72857143,
+      "std": 41093.26894723
+    },
+    "log_nearest_surface_water_m": {
+      "mean": 10.74332498,
+      "std": 0.78217869
+    },
+    "log_flow_accumulation": {
+      "mean": 6.0815372,
+      "std": 1.59411818
+    },
+    "log_dist_to_fault_m": {
+      "mean": 11.73073812,
+      "std": 0.70244001
+    },
+    "water_balance_mm": {
+      "mean": -381.10142857,
+      "std": 93.07371501
+    },
+    "soil_infiltration_index": {
+      "mean": 0.35108071,
+      "std": 0.06694918
+    },
+    "geology_water_index": {
+      "mean": 0.5220048,
+      "std": 0.1726831
+    },
+    "vegetation_moisture_index": {
+      "mean": 0.33645557,
+      "std": 0.05583746
+    },
+    "access_cost_index": {
+      "mean": 11.5733495,
+      "std": 0.5522086
+    },
+    "aridity_pressure_index": {
+      "mean": 0.41436541,
+      "std": 0.03871022
+    }
+  },
+  "weights": {
+    "lithology_class_enc": -0.56102569,
+    "summer_precip_mm": 0.52790925,
+    "dry_months_count": -0.54227163,
+    "dist_to_lake_m": 0.47714422,
+    "annual_precip_mm": 0.45342276,
+    "aridity_index": 0.45238133,
+    "pasture_area_5km": -0.45708787,
+    "is_pasture": -0.42051261,
+    "dist_to_canal_m": -0.4397467,
+    "soil_texture_class_enc": -0.39815407,
+    "silt_pct": -0.37735789,
+    "aet_mm": 0.35969563,
+    "carbonate_flag": -0.37937551,
+    "soil_water_capacity_proxy": 0.36064718,
+    "log_nearest_surface_water_m": -0.33794611,
+    "flow_accumulation": -0.33730556,
+    "ndvi_mean_growing_season": -0.3187938,
+    "ndvi_summer_min": -0.31472508,
+    "curvature": -0.30351373,
+    "nearest_surface_water_m": -0.31440804,
+    "elevation_m": 0.28710757,
+    "land_cover_class_enc": -0.27447932,
+    "dist_to_river_m": -0.29000795,
+    "water_balance_mm": 0.27360436,
+    "water_deficit_mm": -0.27360436,
+    "geological_age_enc": 0.28151119,
+    "aquifer_proxy": 0.272375,
+    "vegetation_moisture_index": -0.25282205,
+    "spring_precip_mm": 0.25627824,
+    "ndvi_anomaly": -0.25187313,
+    "alluvial_flag": 0.24599818,
+    "geology_water_index": 0.22005085,
+    "near_fault_flag": 0.19597697,
+    "clay_pct": 0.20757863,
+    "log_dist_to_fault_m": -0.20119243,
+    "slope_deg": 0.20204265,
+    "soil_infiltration_index": 0.19374036,
+    "organic_carbon": 0.19916283,
+    "dist_to_road_m": -0.19369523,
+    "access_cost_index": -0.18769018,
+    "bulk_density": -0.18610646,
+    "drainage_density_5km": 0.18100408,
+    "grazing_pressure_proxy": -0.15571195,
+    "fault_density_10km": 0.15056177,
+    "dist_to_fault_m": -0.12693349,
+    "annual_temp_c": -0.12786063,
+    "aridity_pressure_index": 0.11782715,
+    "log_flow_accumulation": -0.11776134,
+    "nearest_water_type_enc": -0.10795781,
+    "sand_pct": 0.10442853,
+    "pet_mm": 0.06661669,
+    "dist_to_settlement_m": 0.05925112,
+    "vegetation_stability": 0.05148337,
+    "twi": 0.02621686,
+    "permeability_proxy": 0.00794674,
+    "summer_temp_c": -0.00548528
+  },
+  "intercept": 0.46536325,
+  "gaussianParams": {
+    "classes": {
+      "0": {
+        "prior": 0.38571428571428573,
+        "means": [
+          -0.12411191476825359,
+          0.18644414778763127,
+          0.2072019850931273,
+          -0.016104644839271612,
+          -0.1763660796659912,
+          0.17814774305625194,
+          -0.2931028781265879,
+          0.2701301171628587,
+          -0.1111882194630699,
+          -0.27853112367184224,
+          -0.15742806087735634,
+          -0.3242871083359384,
+          0.3331097151666352,
+          -0.04092168057934114,
+          -0.22095588693970425,
+          -0.27789138913945216,
+          0.1680712526693693,
+          0.07854295682900053,
+          0.0033695294984339252,
+          0.19583047801081685,
+          0.19333112271728883,
+          0.15472206416699028,
+          -0.03162549739729944,
+          0.2583148889231818,
+          0.28078254681438997,
+          0.09565162789141184,
+          -0.06414895302589495,
+          -0.12751258711718721,
+          0.23180556122598586,
+          -0.12234287822286948,
+          0.11432254090732127,
+          -0.22154041023953683,
+          -0.16731607203767615,
+          -0.00488157079194534,
+          0.23304495413721837,
+          -0.15111316786387669,
+          0.07797343102063517,
+          -0.09248794531185935,
+          -0.1203858530857692,
+          0.11898421546861165,
+          -0.03639711676897642,
+          0.06631694061980471,
+          0.16860872475185693,
+          0.24458036018719245,
+          0.34463006739256996,
+          -0.17292830422242395,
+          0.193136369172699,
+          0.20759546684458755,
+          0.07233910737784642,
+          0.12358963785242724,
+          -0.16807125266936931,
+          -0.11901193823076793,
+          -0.13517409322642843,
+          0.15530497318952483,
+          0.11529539533780865,
+          -0.07237953229548327
+        ],
+        "variances": [
+          0.75374463997031,
+          0.6891130846103154,
+          1.4755862825338435,
+          0.9385255028450366,
+          0.879295558678222,
+          1.1852180114577082,
+          1.018399135525496,
+          1.1242534331658371,
+          1.3575439659858464,
+          0.7019741712571537,
+          1.1676569410044921,
+          0.5968354009056619,
+          1.0488915985029381,
+          0.7067959309019883,
+          0.7391079731248189,
+          0.6793162372027811,
+          0.6711075411845135,
+          1.5182750416592208,
+          1.3964641015965458,
+          0.8862662434822904,
+          0.9061018679064866,
+          0.9918029371164446,
+          1.0105938645820922,
+          0.48286899074468237,
+          0.9625527635947898,
+          0.6406875718474109,
+          0.8938296155632176,
+          0.7227856098100522,
+          1.0280593173148302,
+          1.1255821543388802,
+          1.0439382685095464,
+          1.2358455652438811,
+          1.1401469044150172,
+          0.9764639443225411,
+          1.3520331740851108,
+          1.0575843909177243,
+          1.2131089786534732,
+          1.231774466035311,
+          0.0001,
+          1.1160246623010432,
+          0.7419327034871145,
+          0.6926401755192809,
+          0.5848032728437362,
+          0.7065463683928647,
+          1.0172420564785356,
+          1.0473193531458866,
+          1.0906558139568383,
+          0.8429572454898668,
+          1.3171084037427359,
+          0.6929391399648159,
+          0.6711075411845137,
+          0.5325966629683416,
+          1.0704607449926924,
+          0.9880715726231887,
+          0.7946585122463085,
+          0.7091720258050425
+        ]
+      },
+      "1": {
+        "prior": 0.6142857142857143,
+        "means": [
+          0.07793073718006603,
+          -0.11706958116897778,
+          -0.1301035720352195,
+          0.010112218852565158,
+          0.11074149188329675,
+          -0.1118602107562512,
+          0.18404134207948533,
+          -0.16961658519528328,
+          0.0698158587326254,
+          0.17489163579394693,
+          0.09885017776020014,
+          0.20362213779233293,
+          -0.20916191417439908,
+          0.02569500873586455,
+          0.1387397429621396,
+          0.17448994201779586,
+          -0.10553311214123114,
+          -0.04931767056704668,
+          -0.0021157510804122406,
+          -0.12296332340214125,
+          -0.12139396077597198,
+          -0.09715106354671481,
+          0.01985787045876987,
+          -0.16219772095176546,
+          -0.17630532009275648,
+          -0.060060324489956664,
+          0.040279575155793966,
+          0.08006604307358263,
+          -0.14555232914189808,
+          0.0768199467911043,
+          -0.07178392103482788,
+          0.1391067692201744,
+          0.10505892895388903,
+          0.0030651723577331228,
+          -0.14633055259778838,
+          0.09488501237964347,
+          -0.04896006133853817,
+          0.058073826126051054,
+          0.07559111705385509,
+          -0.07471101901517452,
+          0.02285400355261316,
+          -0.041640869691505406,
+          -0.10587059461163136,
+          -0.15357371453614396,
+          -0.2163956237116139,
+          0.10858288869780111,
+          -0.12127167366657832,
+          -0.13035064197218427,
+          -0.045422230213996655,
+          -0.077602795860826,
+          0.10553311214123115,
+          0.0747284263309469,
+          0.08487675621194309,
+          -0.09751707618877069,
+          -0.07239478311908579,
+          0.04544761330181455
+        ],
+        "variances": [
+          1.1388801258151457,
+          1.1596758380236778,
+          0.6574913973034409,
+          1.0383351549921622,
+          1.0439964400255952,
+          0.8512599675525646,
+          0.900632791785284,
+          0.8473920684258786,
+          0.7628586941113615,
+          1.1078326490084238,
+          0.8693938875982977,
+          1.1456558552906297,
+          0.8558780522003886,
+          1.182393164182517,
+          1.1139118446146712,
+          1.12242357974539,
+          1.1776395493749066,
+          0.6682656971693774,
+          0.7510458190906021,
+          1.032214273907055,
+          1.0207535678039685,
+          0.9806772507371713,
+          0.9923256884685546,
+          1.2565039816489805,
+          0.9429263583130405,
+          1.216262670080915,
+          1.0624587883621648,
+          1.1574448501081436,
+          0.9274560390322208,
+          0.9058464115157128,
+          0.9590514030886697,
+          0.8017424601861822,
+          0.8833853550707217,
+          1.0147540954274796,
+          0.7234416864039585,
+          0.9405008188134203,
+          0.8599727139248363,
+          0.8457234976095545,
+          1.6130928586545015,
+          0.9126761367201196,
+          1.1606881306356256,
+          1.1884979210509583,
+          1.231645632953162,
+          1.1231155824240744,
+          0.8677700880989809,
+          0.9397205494966342,
+          0.9049477923647261,
+          1.0545567489677694,
+          0.7955364383193192,
+          1.17719256093897,
+          1.1776395493749063,
+          1.2790079037152113,
+          0.9370800043304836,
+          0.9828354757200616,
+          1.1153475630126042,
+          1.1772579514798294
+        ]
+      }
+    }
+  },
+  "featureImportance": [
+    {
+      "feature": "lithology_class_enc",
+      "label": "Литология",
+      "group": "Геология",
+      "weight": -0.56102569,
+      "importance": 0.039056,
+      "direction": "risk"
+    },
+    {
+      "feature": "summer_precip_mm",
+      "label": "Летние осадки",
+      "group": "Климат",
+      "weight": 0.52790925,
+      "importance": 0.038224,
+      "direction": "positive"
+    },
+    {
+      "feature": "dry_months_count",
+      "label": "Сухие месяцы",
+      "group": "Климат",
+      "weight": -0.54227163,
+      "importance": 0.037554,
+      "direction": "risk"
+    },
+    {
+      "feature": "dist_to_lake_m",
+      "label": "Расстояние до озера",
+      "group": "Вода",
+      "weight": 0.47714422,
+      "importance": 0.03292,
+      "direction": "positive"
+    },
+    {
+      "feature": "annual_precip_mm",
+      "label": "Годовые осадки",
+      "group": "Климат",
+      "weight": 0.45342276,
+      "importance": 0.032214,
+      "direction": "positive"
+    },
+    {
+      "feature": "aridity_index",
+      "label": "Индекс засушливости",
+      "group": "Климат",
+      "weight": 0.45238133,
+      "importance": 0.032212,
+      "direction": "positive"
+    },
+    {
+      "feature": "pasture_area_5km",
+      "label": "Площадь пастбищ вокруг",
+      "group": "Растительность",
+      "weight": -0.45708787,
+      "importance": 0.031649,
+      "direction": "risk"
+    },
+    {
+      "feature": "is_pasture",
+      "label": "Пастбищный/степной контекст",
+      "group": "Растительность",
+      "weight": -0.42051261,
+      "importance": 0.030475,
+      "direction": "risk"
+    },
+    {
+      "feature": "dist_to_canal_m",
+      "label": "Расстояние до канала",
+      "group": "Вода",
+      "weight": -0.4397467,
+      "importance": 0.029933,
+      "direction": "risk"
+    },
+    {
+      "feature": "soil_texture_class_enc",
+      "label": "Тип почвы",
+      "group": "Почвы",
+      "weight": -0.39815407,
+      "importance": 0.028133,
+      "direction": "risk"
+    },
+    {
+      "feature": "silt_pct",
+      "label": "Доля ила",
+      "group": "Почвы",
+      "weight": -0.37735789,
+      "importance": 0.025792,
+      "direction": "risk"
+    },
+    {
+      "feature": "aet_mm",
+      "label": "Фактическая испаряемость",
+      "group": "Климат",
+      "weight": 0.35969563,
+      "importance": 0.025255,
+      "direction": "positive"
+    },
+    {
+      "feature": "carbonate_flag",
+      "label": "Карбонатные породы",
+      "group": "Геология",
+      "weight": -0.37937551,
+      "importance": 0.025169,
+      "direction": "risk"
+    },
+    {
+      "feature": "soil_water_capacity_proxy",
+      "label": "Водоудерживающая способность почвы",
+      "group": "Почвы",
+      "weight": 0.36064718,
+      "importance": 0.024148,
+      "direction": "positive"
+    },
+    {
+      "feature": "log_nearest_surface_water_m",
+      "label": "Лог-дистанция до воды",
+      "group": "Вода",
+      "weight": -0.33794611,
+      "importance": 0.023448,
+      "direction": "risk"
+    },
+    {
+      "feature": "flow_accumulation",
+      "label": "Накопление стока",
+      "group": "Рельеф",
+      "weight": -0.33730556,
+      "importance": 0.022074,
+      "direction": "risk"
+    },
+    {
+      "feature": "ndvi_mean_growing_season",
+      "label": "NDVI за сезон роста",
+      "group": "Растительность",
+      "weight": -0.3187938,
+      "importance": 0.021998,
+      "direction": "risk"
+    },
+    {
+      "feature": "ndvi_summer_min",
+      "label": "Минимальный летний NDVI",
+      "group": "Растительность",
+      "weight": -0.31472508,
+      "importance": 0.02167,
+      "direction": "risk"
+    },
+    {
+      "feature": "curvature",
+      "label": "Кривизна поверхности",
+      "group": "Рельеф",
+      "weight": -0.30351373,
+      "importance": 0.021335,
+      "direction": "risk"
+    },
+    {
+      "feature": "nearest_surface_water_m",
+      "label": "Ближайшая поверхностная вода",
+      "group": "Вода",
+      "weight": -0.31440804,
+      "importance": 0.021272,
+      "direction": "risk"
+    },
+    {
+      "feature": "elevation_m",
+      "label": "Высота точки",
+      "group": "Рельеф",
+      "weight": 0.28710757,
+      "importance": 0.019787,
+      "direction": "positive"
+    },
+    {
+      "feature": "land_cover_class_enc",
+      "label": "Тип покрытия земли",
+      "group": "Растительность",
+      "weight": -0.27447932,
+      "importance": 0.019465,
+      "direction": "risk"
+    },
+    {
+      "feature": "dist_to_river_m",
+      "label": "Расстояние до реки",
+      "group": "Вода",
+      "weight": -0.29000795,
+      "importance": 0.019424,
+      "direction": "risk"
+    },
+    {
+      "feature": "water_balance_mm",
+      "label": "Водный баланс",
+      "group": "Климат",
+      "weight": 0.27360436,
+      "importance": 0.019233,
+      "direction": "positive"
+    },
+    {
+      "feature": "water_deficit_mm",
+      "label": "Дефицит влаги",
+      "group": "Климат",
+      "weight": -0.27360436,
+      "importance": 0.019233,
+      "direction": "risk"
+    },
+    {
+      "feature": "geological_age_enc",
+      "label": "Геологический возраст",
+      "group": "Геология",
+      "weight": 0.28151119,
+      "importance": 0.019088,
+      "direction": "positive"
+    },
+    {
+      "feature": "aquifer_proxy",
+      "label": "Прокси водоносного потенциала",
+      "group": "Геология",
+      "weight": 0.272375,
+      "importance": 0.018301,
+      "direction": "positive"
+    },
+    {
+      "feature": "vegetation_moisture_index",
+      "label": "Индекс влажности по растительности",
+      "group": "Растительность",
+      "weight": -0.25282205,
+      "importance": 0.017212,
+      "direction": "risk"
+    },
+    {
+      "feature": "spring_precip_mm",
+      "label": "Весенние осадки",
+      "group": "Климат",
+      "weight": 0.25627824,
+      "importance": 0.017162,
+      "direction": "positive"
+    },
+    {
+      "feature": "ndvi_anomaly",
+      "label": "Аномалия NDVI",
+      "group": "Растительность",
+      "weight": -0.25187313,
+      "importance": 0.017141,
+      "direction": "risk"
+    },
+    {
+      "feature": "alluvial_flag",
+      "label": "Аллювиальные отложения",
+      "group": "Геология",
+      "weight": 0.24599818,
+      "importance": 0.016633,
+      "direction": "positive"
+    },
+    {
+      "feature": "geology_water_index",
+      "label": "Геологический водный индекс",
+      "group": "Геология",
+      "weight": 0.22005085,
+      "importance": 0.014844,
+      "direction": "positive"
+    },
+    {
+      "feature": "near_fault_flag",
+      "label": "Разлом рядом",
+      "group": "Геология",
+      "weight": 0.19597697,
+      "importance": 0.014748,
+      "direction": "positive"
+    },
+    {
+      "feature": "clay_pct",
+      "label": "Доля глины",
+      "group": "Почвы",
+      "weight": 0.20757863,
+      "importance": 0.014469,
+      "direction": "positive"
+    },
+    {
+      "feature": "log_dist_to_fault_m",
+      "label": "Лог-дистанция до разлома",
+      "group": "Геология",
+      "weight": -0.20119243,
+      "importance": 0.014062,
+      "direction": "risk"
+    },
+    {
+      "feature": "slope_deg",
+      "label": "Уклон рельефа",
+      "group": "Рельеф",
+      "weight": 0.20204265,
+      "importance": 0.014037,
+      "direction": "positive"
+    },
+    {
+      "feature": "soil_infiltration_index",
+      "label": "Индекс инфильтрации почвы",
+      "group": "Почвы",
+      "weight": 0.19374036,
+      "importance": 0.013758,
+      "direction": "positive"
+    },
+    {
+      "feature": "organic_carbon",
+      "label": "Органический углерод",
+      "group": "Почвы",
+      "weight": 0.19916283,
+      "importance": 0.013356,
+      "direction": "positive"
+    },
+    {
+      "feature": "dist_to_road_m",
+      "label": "Расстояние до дороги",
+      "group": "Доступность",
+      "weight": -0.19369523,
+      "importance": 0.012998,
+      "direction": "risk"
+    },
+    {
+      "feature": "access_cost_index",
+      "label": "Индекс стоимости доступа",
+      "group": "Доступность",
+      "weight": -0.18769018,
+      "importance": 0.01298,
+      "direction": "risk"
+    },
+    {
+      "feature": "bulk_density",
+      "label": "Плотность почвы",
+      "group": "Почвы",
+      "weight": -0.18610646,
+      "importance": 0.012568,
+      "direction": "risk"
+    },
+    {
+      "feature": "drainage_density_5km",
+      "label": "Плотность дренажной сети",
+      "group": "Вода",
+      "weight": 0.18100408,
+      "importance": 0.011881,
+      "direction": "positive"
+    },
+    {
+      "feature": "grazing_pressure_proxy",
+      "label": "Прокси пастбищной нагрузки",
+      "group": "Растительность",
+      "weight": -0.15571195,
+      "importance": 0.010921,
+      "direction": "risk"
+    },
+    {
+      "feature": "fault_density_10km",
+      "label": "Плотность разломов",
+      "group": "Геология",
+      "weight": 0.15056177,
+      "importance": 0.009984,
+      "direction": "positive"
+    },
+    {
+      "feature": "dist_to_fault_m",
+      "label": "Расстояние до разлома",
+      "group": "Геология",
+      "weight": -0.12693349,
+      "importance": 0.008426,
+      "direction": "risk"
+    },
+    {
+      "feature": "annual_temp_c",
+      "label": "Среднегодовая температура",
+      "group": "Климат",
+      "weight": -0.12786063,
+      "importance": 0.008264,
+      "direction": "risk"
+    },
+    {
+      "feature": "aridity_pressure_index",
+      "label": "Индекс аридного давления",
+      "group": "Климат",
+      "weight": 0.11782715,
+      "importance": 0.008199,
+      "direction": "positive"
+    },
+    {
+      "feature": "log_flow_accumulation",
+      "label": "Лог-накопление стока",
+      "group": "Рельеф",
+      "weight": -0.11776134,
+      "importance": 0.007744,
+      "direction": "risk"
+    },
+    {
+      "feature": "nearest_water_type_enc",
+      "label": "Тип ближайшей воды",
+      "group": "Прочее",
+      "weight": -0.10795781,
+      "importance": 0.007523,
+      "direction": "risk"
+    },
+    {
+      "feature": "sand_pct",
+      "label": "Доля песка",
+      "group": "Почвы",
+      "weight": 0.10442853,
+      "importance": 0.007136,
+      "direction": "positive"
+    },
+    {
+      "feature": "pet_mm",
+      "label": "Потенциальная испаряемость",
+      "group": "Климат",
+      "weight": 0.06661669,
+      "importance": 0.004632,
+      "direction": "positive"
+    },
+    {
+      "feature": "dist_to_settlement_m",
+      "label": "Расстояние до населенного пункта",
+      "group": "Доступность",
+      "weight": 0.05925112,
+      "importance": 0.004106,
+      "direction": "positive"
+    },
+    {
+      "feature": "vegetation_stability",
+      "label": "Стабильность растительности",
+      "group": "Растительность",
+      "weight": 0.05148337,
+      "importance": 0.003477,
+      "direction": "positive"
+    },
+    {
+      "feature": "twi",
+      "label": "Topographic Wetness Index",
+      "group": "Рельеф",
+      "weight": 0.02621686,
+      "importance": 0.001782,
+      "direction": "positive"
+    },
+    {
+      "feature": "permeability_proxy",
+      "label": "Прокси проницаемости пород",
+      "group": "Геология",
+      "weight": 0.00794674,
+      "importance": 0.000538,
+      "direction": "positive"
+    },
+    {
+      "feature": "summer_temp_c",
+      "label": "Летняя температура",
+      "group": "Климат",
+      "weight": -0.00548528,
+      "importance": 0.000358,
+      "direction": "risk"
+    }
+  ],
+  "categoryMappings": {
+    "nearest_water_type": {
+      "canal": 0.0,
+      "lake": 1.0,
+      "river": 2.0
+    },
+    "land_cover_class": {
+      "bare_sparse_vegetation": 0.0,
+      "cropland": 1.0,
+      "herbaceous_vegetation": 2.0,
+      "shrubland": 3.0
+    },
+    "soil_texture_class": {
+      "loam": 0.0,
+      "sandy": 1.0,
+      "sandy_loam": 2.0
+    },
+    "lithology_class": {
+      "alluvial": 0.0,
+      "conglomerate": 1.0,
+      "fluvial_sand": 2.0,
+      "granite": 3.0,
+      "lacustrine": 4.0,
+      "limestone": 5.0,
+      "loess": 6.0,
+      "metamorphic": 7.0
+    },
+    "geological_age": {
+      "Cretaceous-Paleogene": 0.0,
+      "Neogene": 1.0,
+      "Neogene-Quaternary": 2.0,
+      "Paleozoic": 3.0,
+      "Pleistocene": 4.0,
+      "Quaternary": 5.0
+    }
+  },
+  "metrics": {
+    "train": {
+      "accuracy": 0.6429,
+      "precision": 0.9091,
+      "recall": 0.4651,
+      "f1": 0.6154,
+      "auc": 0.8501,
+      "count": 70,
+      "positiveRate": 0.6143,
+      "confusionMatrix": {
+        "tp": 20,
+        "fp": 2,
+        "tn": 25,
+        "fn": 23
+      }
+    },
+    "val": {
+      "accuracy": 0.4667,
+      "precision": 0.6667,
+      "recall": 0.4,
+      "f1": 0.5,
+      "auc": 0.56,
+      "count": 15,
+      "positiveRate": 0.6667,
+      "confusionMatrix": {
+        "tp": 4,
+        "fp": 2,
+        "tn": 3,
+        "fn": 6
+      }
+    },
+    "test": {
+      "accuracy": 0.4667,
+      "precision": 0.5714,
+      "recall": 0.4444,
+      "f1": 0.5,
+      "auc": 0.5556,
+      "count": 15,
+      "positiveRate": 0.6,
+      "confusionMatrix": {
+        "tp": 4,
+        "fp": 3,
+        "tn": 3,
+        "fn": 5
+      }
+    }
+  },
+  "modelComparison": {
+    "chosenModel": "GaussianNaiveBayes",
+    "chosenReason": "Selected among browser-safe models by validation AUC, F1, and overfit penalty.",
+    "models": [
+      {
+        "modelType": "LogisticRegressionV1",
+        "browserInference": true,
+        "featureCount": 7,
+        "metrics": {
+          "train": {
+            "accuracy": 0.6571,
+            "precision": 0.661,
+            "recall": 0.907,
+            "f1": 0.7647,
+            "auc": 0.6761,
+            "count": 70,
+            "positiveRate": 0.6143,
+            "confusionMatrix": {
+              "tp": 39,
+              "fp": 20,
+              "tn": 7,
+              "fn": 4
+            }
+          },
+          "val": {
+            "accuracy": 0.4,
+            "precision": 0.5455,
+            "recall": 0.6,
+            "f1": 0.5714,
+            "auc": 0.28,
+            "count": 15,
+            "positiveRate": 0.6667,
+            "confusionMatrix": {
+              "tp": 6,
+              "fp": 5,
+              "tn": 0,
+              "fn": 4
+            }
+          },
+          "test": {
+            "accuracy": 0.6667,
+            "precision": 0.6429,
+            "recall": 1.0,
+            "f1": 0.7826,
+            "auc": 0.537,
+            "count": 15,
+            "positiveRate": 0.6,
+            "confusionMatrix": {
+              "tp": 9,
+              "fp": 5,
+              "tn": 1,
+              "fn": 0
+            }
+          }
+        },
+        "selectionScore": 0.243
+      },
+      {
+        "modelType": "LogisticRegressionV2",
+        "browserInference": true,
+        "featureCount": 56,
+        "metrics": {
+          "train": {
+            "accuracy": 0.9286,
+            "precision": 0.913,
+            "recall": 0.9767,
+            "f1": 0.9438,
+            "auc": 0.9647,
+            "count": 70,
+            "positiveRate": 0.6143,
+            "confusionMatrix": {
+              "tp": 42,
+              "fp": 4,
+              "tn": 23,
+              "fn": 1
+            }
+          },
+          "val": {
+            "accuracy": 0.4667,
+            "precision": 0.6,
+            "recall": 0.6,
+            "f1": 0.6,
+            "auc": 0.4,
+            "count": 15,
+            "positiveRate": 0.6667,
+            "confusionMatrix": {
+              "tp": 6,
+              "fp": 4,
+              "tn": 1,
+              "fn": 4
+            }
+          },
+          "test": {
+            "accuracy": 0.4667,
+            "precision": 0.5556,
+            "recall": 0.5556,
+            "f1": 0.5556,
+            "auc": 0.4074,
+            "count": 15,
+            "positiveRate": 0.6,
+            "confusionMatrix": {
+              "tp": 5,
+              "fp": 4,
+              "tn": 2,
+              "fn": 4
+            }
+          }
+        },
+        "selectionScore": 0.3344
+      },
+      {
+        "modelType": "PolynomialLogisticRegressionV2",
+        "browserInference": true,
+        "featureCount": 60,
+        "metrics": {
+          "train": {
+            "accuracy": 0.9286,
+            "precision": 0.913,
+            "recall": 0.9767,
+            "f1": 0.9438,
+            "auc": 0.9612,
+            "count": 70,
+            "positiveRate": 0.6143,
+            "confusionMatrix": {
+              "tp": 42,
+              "fp": 4,
+              "tn": 23,
+              "fn": 1
+            }
+          },
+          "val": {
+            "accuracy": 0.4667,
+            "precision": 0.6,
+            "recall": 0.6,
+            "f1": 0.6,
+            "auc": 0.4,
+            "count": 15,
+            "positiveRate": 0.6667,
+            "confusionMatrix": {
+              "tp": 6,
+              "fp": 4,
+              "tn": 1,
+              "fn": 4
+            }
+          },
+          "test": {
+            "accuracy": 0.4667,
+            "precision": 0.5556,
+            "recall": 0.5556,
+            "f1": 0.5556,
+            "auc": 0.3889,
+            "count": 15,
+            "positiveRate": 0.6,
+            "confusionMatrix": {
+              "tp": 5,
+              "fp": 4,
+              "tn": 2,
+              "fn": 4
+            }
+          }
+        },
+        "selectionScore": 0.335
+      },
+      {
+        "modelType": "DecisionStumpEnsemble",
+        "browserInference": false,
+        "featureCount": 60,
+        "metrics": {
+          "train": {
+            "accuracy": 0.7429,
+            "precision": 0.7119,
+            "recall": 0.9767,
+            "f1": 0.8235,
+            "auc": 0.8579,
+            "count": 70,
+            "positiveRate": 0.6143,
+            "confusionMatrix": {
+              "tp": 42,
+              "fp": 17,
+              "tn": 10,
+              "fn": 1
+            }
+          },
+          "val": {
+            "accuracy": 0.6667,
+            "precision": 0.6667,
+            "recall": 1.0,
+            "f1": 0.8,
+            "auc": 0.06,
+            "count": 15,
+            "positiveRate": 0.6667,
+            "confusionMatrix": {
+              "tp": 10,
+              "fp": 5,
+              "tn": 0,
+              "fn": 0
+            }
+          },
+          "test": {
+            "accuracy": 0.5333,
+            "precision": 0.5714,
+            "recall": 0.8889,
+            "f1": 0.6957,
+            "auc": 0.4815,
+            "count": 15,
+            "positiveRate": 0.6,
+            "confusionMatrix": {
+              "tp": 8,
+              "fp": 6,
+              "tn": 0,
+              "fn": 1
+            }
+          }
+        },
+        "selectionScore": null
+      },
+      {
+        "modelType": "GaussianNaiveBayes",
+        "browserInference": true,
+        "featureCount": 56,
+        "metrics": {
+          "train": {
+            "accuracy": 0.6429,
+            "precision": 0.9091,
+            "recall": 0.4651,
+            "f1": 0.6154,
+            "auc": 0.8501,
+            "count": 70,
+            "positiveRate": 0.6143,
+            "confusionMatrix": {
+              "tp": 20,
+              "fp": 2,
+              "tn": 25,
+              "fn": 23
+            }
+          },
+          "val": {
+            "accuracy": 0.4667,
+            "precision": 0.6667,
+            "recall": 0.4,
+            "f1": 0.5,
+            "auc": 0.56,
+            "count": 15,
+            "positiveRate": 0.6667,
+            "confusionMatrix": {
+              "tp": 4,
+              "fp": 2,
+              "tn": 3,
+              "fn": 6
+            }
+          },
+          "test": {
+            "accuracy": 0.4667,
+            "precision": 0.5714,
+            "recall": 0.4444,
+            "f1": 0.5,
+            "auc": 0.5556,
+            "count": 15,
+            "positiveRate": 0.6,
+            "confusionMatrix": {
+              "tp": 4,
+              "fp": 3,
+              "tn": 3,
+              "fn": 5
+            }
+          }
+        },
+        "selectionScore": 0.5378
+      }
+    ]
+  },
+  "selectedModelReason": "Selected among browser-safe models by validation AUC, F1, and overfit penalty.",
+  "leakageExcluded": [
+    "depth_m",
+    "yield_lps",
+    "tds_g_l",
+    "water_quality_note",
+    "success",
+    "source_url",
+    "source_type",
+    "source_description",
+    "data_status",
+    "notes"
+  ],
+  "notes": [
+    "Uses only pre-drilling GIS, climate, soil, geology, vegetation, and access features.",
+    "Feature engineering includes surface-water proximity, water balance, terrain, soil infiltration, geology, vegetation, and access indices.",
+    "Client-side map inference imputes missing layers with train means and lowers confidence when layers are absent.",
+    "Final production calibration requires verified historical wells from hydrogeological services."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "smartpasture-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server/dev-with-ai.mjs",
+    "dev:ai": "node server/dev-with-ai.mjs",
+    "dev:mobile": "node server/dev-with-ai.mjs --host",
+    "dev:web": "vite",
+    "build": "tsc -b && vite build",
+    "quality": "npm run lint && npm run typecheck && npm run build",
+    "precommit": "lint-staged && npm run typecheck && npm run build",
+    "typecheck": "tsc -b",
+    "lint": "eslint .",
+    "llm:api": "node server/local-llm-server.mjs",
+    "preview": "npm run preview:ai",
+    "preview:web": "vite preview",
+    "preview:ai": "npm run build && node server/local-llm-server.mjs --static dist --port 4173",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --max-warnings=0"
+    ]
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "leaflet": "1.9.4",
+    "lucide-react": "1.8.0",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "react-leaflet": "5.0.0",
+    "react-router-dom": "7.14.0",
+    "web-vitals": "5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.4",
+    "@types/leaflet": "1.9.21",
+    "@types/node": "24.12.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "@vitejs/plugin-react": "6.0.1",
+    "eslint": "9.39.4",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.5.2",
+    "globals": "17.4.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.2.7",
+    "typescript": "6.0.2",
+    "typescript-eslint": "8.58.1",
+    "vite": "8.0.8"
+  }
+}

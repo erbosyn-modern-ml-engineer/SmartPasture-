@@ -1,0 +1,287 @@
+{
+  "version": "classic-ml-comparison-v2",
+  "trainedAt": "2026-06-02",
+  "audience": "hydrogeological_services",
+  "target": "success",
+  "leakageExcluded": [
+    "depth_m",
+    "yield_lps",
+    "tds_g_l",
+    "water_quality_note",
+    "success",
+    "source_url",
+    "source_type",
+    "source_description",
+    "data_status",
+    "notes"
+  ],
+  "chosenModel": "GaussianNaiveBayes",
+  "chosenReason": "Selected among browser-safe models by validation AUC, F1, and overfit penalty.",
+  "models": [
+    {
+      "modelType": "LogisticRegressionV1",
+      "browserInference": true,
+      "featureCount": 7,
+      "metrics": {
+        "train": {
+          "accuracy": 0.6571,
+          "precision": 0.661,
+          "recall": 0.907,
+          "f1": 0.7647,
+          "auc": 0.6761,
+          "count": 70,
+          "positiveRate": 0.6143,
+          "confusionMatrix": {
+            "tp": 39,
+            "fp": 20,
+            "tn": 7,
+            "fn": 4
+          }
+        },
+        "val": {
+          "accuracy": 0.4,
+          "precision": 0.5455,
+          "recall": 0.6,
+          "f1": 0.5714,
+          "auc": 0.28,
+          "count": 15,
+          "positiveRate": 0.6667,
+          "confusionMatrix": {
+            "tp": 6,
+            "fp": 5,
+            "tn": 0,
+            "fn": 4
+          }
+        },
+        "test": {
+          "accuracy": 0.6667,
+          "precision": 0.6429,
+          "recall": 1.0,
+          "f1": 0.7826,
+          "auc": 0.537,
+          "count": 15,
+          "positiveRate": 0.6,
+          "confusionMatrix": {
+            "tp": 9,
+            "fp": 5,
+            "tn": 1,
+            "fn": 0
+          }
+        }
+      },
+      "selectionScore": 0.243
+    },
+    {
+      "modelType": "LogisticRegressionV2",
+      "browserInference": true,
+      "featureCount": 56,
+      "metrics": {
+        "train": {
+          "accuracy": 0.9286,
+          "precision": 0.913,
+          "recall": 0.9767,
+          "f1": 0.9438,
+          "auc": 0.9647,
+          "count": 70,
+          "positiveRate": 0.6143,
+          "confusionMatrix": {
+            "tp": 42,
+            "fp": 4,
+            "tn": 23,
+            "fn": 1
+          }
+        },
+        "val": {
+          "accuracy": 0.4667,
+          "precision": 0.6,
+          "recall": 0.6,
+          "f1": 0.6,
+          "auc": 0.4,
+          "count": 15,
+          "positiveRate": 0.6667,
+          "confusionMatrix": {
+            "tp": 6,
+            "fp": 4,
+            "tn": 1,
+            "fn": 4
+          }
+        },
+        "test": {
+          "accuracy": 0.4667,
+          "precision": 0.5556,
+          "recall": 0.5556,
+          "f1": 0.5556,
+          "auc": 0.4074,
+          "count": 15,
+          "positiveRate": 0.6,
+          "confusionMatrix": {
+            "tp": 5,
+            "fp": 4,
+            "tn": 2,
+            "fn": 4
+          }
+        }
+      },
+      "selectionScore": 0.3344
+    },
+    {
+      "modelType": "PolynomialLogisticRegressionV2",
+      "browserInference": true,
+      "featureCount": 60,
+      "metrics": {
+        "train": {
+          "accuracy": 0.9286,
+          "precision": 0.913,
+          "recall": 0.9767,
+          "f1": 0.9438,
+          "auc": 0.9612,
+          "count": 70,
+          "positiveRate": 0.6143,
+          "confusionMatrix": {
+            "tp": 42,
+            "fp": 4,
+            "tn": 23,
+            "fn": 1
+          }
+        },
+        "val": {
+          "accuracy": 0.4667,
+          "precision": 0.6,
+          "recall": 0.6,
+          "f1": 0.6,
+          "auc": 0.4,
+          "count": 15,
+          "positiveRate": 0.6667,
+          "confusionMatrix": {
+            "tp": 6,
+            "fp": 4,
+            "tn": 1,
+            "fn": 4
+          }
+        },
+        "test": {
+          "accuracy": 0.4667,
+          "precision": 0.5556,
+          "recall": 0.5556,
+          "f1": 0.5556,
+          "auc": 0.3889,
+          "count": 15,
+          "positiveRate": 0.6,
+          "confusionMatrix": {
+            "tp": 5,
+            "fp": 4,
+            "tn": 2,
+            "fn": 4
+          }
+        }
+      },
+      "selectionScore": 0.335
+    },
+    {
+      "modelType": "DecisionStumpEnsemble",
+      "browserInference": false,
+      "featureCount": 60,
+      "metrics": {
+        "train": {
+          "accuracy": 0.7429,
+          "precision": 0.7119,
+          "recall": 0.9767,
+          "f1": 0.8235,
+          "auc": 0.8579,
+          "count": 70,
+          "positiveRate": 0.6143,
+          "confusionMatrix": {
+            "tp": 42,
+            "fp": 17,
+            "tn": 10,
+            "fn": 1
+          }
+        },
+        "val": {
+          "accuracy": 0.6667,
+          "precision": 0.6667,
+          "recall": 1.0,
+          "f1": 0.8,
+          "auc": 0.06,
+          "count": 15,
+          "positiveRate": 0.6667,
+          "confusionMatrix": {
+            "tp": 10,
+            "fp": 5,
+            "tn": 0,
+            "fn": 0
+          }
+        },
+        "test": {
+          "accuracy": 0.5333,
+          "precision": 0.5714,
+          "recall": 0.8889,
+          "f1": 0.6957,
+          "auc": 0.4815,
+          "count": 15,
+          "positiveRate": 0.6,
+          "confusionMatrix": {
+            "tp": 8,
+            "fp": 6,
+            "tn": 0,
+            "fn": 1
+          }
+        }
+      },
+      "selectionScore": null
+    },
+    {
+      "modelType": "GaussianNaiveBayes",
+      "browserInference": true,
+      "featureCount": 56,
+      "metrics": {
+        "train": {
+          "accuracy": 0.6429,
+          "precision": 0.9091,
+          "recall": 0.4651,
+          "f1": 0.6154,
+          "auc": 0.8501,
+          "count": 70,
+          "positiveRate": 0.6143,
+          "confusionMatrix": {
+            "tp": 20,
+            "fp": 2,
+            "tn": 25,
+            "fn": 23
+          }
+        },
+        "val": {
+          "accuracy": 0.4667,
+          "precision": 0.6667,
+          "recall": 0.4,
+          "f1": 0.5,
+          "auc": 0.56,
+          "count": 15,
+          "positiveRate": 0.6667,
+          "confusionMatrix": {
+            "tp": 4,
+            "fp": 2,
+            "tn": 3,
+            "fn": 6
+          }
+        },
+        "test": {
+          "accuracy": 0.4667,
+          "precision": 0.5714,
+          "recall": 0.4444,
+          "f1": 0.5,
+          "auc": 0.5556,
+          "count": 15,
+          "positiveRate": 0.6,
+          "confusionMatrix": {
+            "tp": 4,
+            "fp": 3,
+            "tn": 3,
+            "fn": 5
+          }
+        }
+      },
+      "selectionScore": 0.5378
+    }
+  ]
+}

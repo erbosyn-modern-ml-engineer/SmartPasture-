@@ -1,0 +1,1135 @@
+﻿{
+  "knowledge_sources": [
+    "Паспорт скважины (форма 1-ВГ), eGov.kz → реестр скважин",
+    "Лаборатории «Казводхоз» и СанПиН по TDS / минерализации",
+    "Топографические карты, DEM SRTM/ASTER, Google Earth Engine",
+    "Архивные гидрогеологические карты по дебиту подземных вод",
+    "Полевые наблюдения команды и ручная экспертная валидация"
+  ],
+  "knowledge_parameters": [
+    {
+      "num": 1,
+      "icon": "📏",
+      "name": "Глубина (м)",
+      "color": "#1E3A8A",
+      "background": "#EFF6FF",
+      "limit": "Оптимум: ≤ 40 м",
+      "source": "Паспорт скважины (форма 1-ВГ), eGov.kz → Реестр скважин",
+      "description": "Глубина до водоносного горизонта — главный физический параметр. Чем глубже, тем дороже бурение и тем ниже HPS-балл. Для пастбищного использования практичный коридор — 15–40 м.",
+      "table": [
+        {
+          "range": "≤ 20 м",
+          "score": "0.95",
+          "status": "GOOD"
+        },
+        {
+          "range": "20–40 м",
+          "score": "0.75",
+          "status": "GOOD"
+        },
+        {
+          "range": "40–60 м",
+          "score": "0.55",
+          "status": "MEDIUM"
+        },
+        {
+          "range": "60–80 м",
+          "score": "0.35",
+          "status": "MEDIUM"
+        },
+        {
+          "range": "> 80 м",
+          "score": "0.15",
+          "status": "BAD"
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "icon": "💧",
+      "name": "TDS — минерализация (г/л)",
+      "color": "#0891B2",
+      "background": "#ECFEFF",
+      "limit": "Максимум для скота: 3.0 г/л",
+      "source": "Лаборатории «Казводхоз», карта минерализации, СанПиН КЗ",
+      "description": "TDS показывает общее солесодержание воды. Для водопоя скота верхняя безопасная практическая граница в этом MVP — около 3.0 г/л. Чем чище вода, тем выше итоговый балл пригодности.",
+      "table": [
+        {
+          "range": "≤ 0.5 г/л",
+          "score": "1.00",
+          "status": "GOOD"
+        },
+        {
+          "range": "0.5–1.0",
+          "score": "0.80",
+          "status": "GOOD"
+        },
+        {
+          "range": "1.0–2.0",
+          "score": "0.55",
+          "status": "MEDIUM"
+        },
+        {
+          "range": "2.0–3.0",
+          "score": "0.30",
+          "status": "MEDIUM"
+        },
+        {
+          "range": "> 3.0 г/л",
+          "score": "0.05",
+          "status": "BAD"
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "icon": "⛰️",
+      "name": "Оценка зоны (рельеф)",
+      "color": "#16A34A",
+      "background": "#F0FDF4",
+      "limit": "Горы > Степь > Пустыня",
+      "source": "Топографические карты, DEM SRTM/ASTER, ручная оценка рельефа",
+      "description": "Тип рельефа влияет на вероятность водонасыщения горизонтов. Горные и предгорные участки в логике этого макета дают лучший базовый шанс, пустынные — самый слабый.",
+      "table": [
+        {
+          "range": "Горная (>1000 м)",
+          "score": "0.90",
+          "status": "GOOD"
+        },
+        {
+          "range": "Предгорья",
+          "score": "0.78",
+          "status": "GOOD"
+        },
+        {
+          "range": "Равнина / Степь",
+          "score": "0.65",
+          "status": "MEDIUM"
+        },
+        {
+          "range": "Полупустыня",
+          "score": "0.45",
+          "status": "MEDIUM"
+        },
+        {
+          "range": "Пустыня",
+          "score": "0.25",
+          "status": "BAD"
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "icon": "🚰",
+      "name": "Напор / дебит воды",
+      "color": "#7C3AED",
+      "background": "#F5F3FF",
+      "limit": "Чем выше, тем лучше",
+      "source": "Гидрогеологическая карта — Predicted exploitable groundwater yield",
+      "description": "Напор воды добавлен как четвёртый компонент в HPS в твоём макете. В мобильной версии он сохранён в калькуляторе, но на экране источников мы оставляем только рабочее объяснение без громоздких формул и лишнего шума.",
+      "table": [
+        {
+          "range": "≥ 8 л/с",
+          "score": "0.80–1.00",
+          "status": "GOOD"
+        },
+        {
+          "range": "4–8 л/с",
+          "score": "0.50–0.79",
+          "status": "MEDIUM"
+        },
+        {
+          "range": "< 4 л/с",
+          "score": "0.10–0.49",
+          "status": "BAD"
+        }
+      ]
+    }
+  ],
+  "zone_options": [
+    {
+      "value": "pebbles",
+      "label": "Галечник",
+      "score": 1.0
+    },
+    {
+      "value": "sand",
+      "label": "Песок",
+      "score": 0.8
+    },
+    {
+      "value": "loam",
+      "label": "Суглинок",
+      "score": 0.2
+    }
+  ],
+  "animal_groups": [
+    {
+      "id": "cattle",
+      "label": "КРС",
+      "emoji": "🐄",
+      "color": "#1E3A8A",
+      "background": "#EFF6FF",
+      "border": "#BFDBFE",
+      "description": "Крупный рогатый скот",
+      "animals": [
+        {
+          "key": "cows",
+          "label": "Корова",
+          "avg": 68.0,
+          "min": 34.0,
+          "max": 155.0,
+          "hint": "68 л/сут (34–155)"
+        },
+        {
+          "key": "calves",
+          "label": "Телёнок",
+          "avg": 10.0,
+          "min": 5.0,
+          "max": 30.0,
+          "hint": "10 л/сут (5–30)"
+        }
+      ]
+    },
+    {
+      "id": "equine",
+      "label": "Лошадиные",
+      "emoji": "🐴",
+      "color": "#7C3AED",
+      "background": "#F5F3FF",
+      "border": "#DDD6FE",
+      "description": "Лошади и жеребята",
+      "animals": [
+        {
+          "key": "horses",
+          "label": "Лошадь",
+          "avg": 32.0,
+          "min": 26.0,
+          "max": 39.0,
+          "hint": "32 л/сут (26–39)"
+        },
+        {
+          "key": "foals",
+          "label": "Жеребёнок",
+          "avg": 15.0,
+          "min": 10.0,
+          "max": 20.0,
+          "hint": "15 л/сут (10–20)"
+        }
+      ]
+    },
+    {
+      "id": "sheep",
+      "label": "Овцеводство",
+      "emoji": "🐑",
+      "color": "#0891B2",
+      "background": "#ECFEFF",
+      "border": "#A5F3FC",
+      "description": "Овцы и ягнята",
+      "animals": [
+        {
+          "key": "sheep",
+          "label": "Овца",
+          "avg": 7.0,
+          "min": 4.0,
+          "max": 11.4,
+          "hint": "7 л/сут (4–11.4)"
+        },
+        {
+          "key": "lambs",
+          "label": "Ягнёнок",
+          "avg": 4.0,
+          "min": 1.9,
+          "max": 5.2,
+          "hint": "4 л/сут (1.9–5.2)"
+        }
+      ]
+    },
+    {
+      "id": "goats",
+      "label": "Козоводство",
+      "emoji": "🐐",
+      "color": "#D97706",
+      "background": "#FFFBEB",
+      "border": "#FDE68A",
+      "description": "Козы и козлята",
+      "animals": [
+        {
+          "key": "goats",
+          "label": "Коза",
+          "avg": 4.0,
+          "min": 1.9,
+          "max": 5.7,
+          "hint": "4 л/сут (1.9–5.7)"
+        },
+        {
+          "key": "kids",
+          "label": "Козлёнок",
+          "avg": 2.5,
+          "min": 1.5,
+          "max": 3.3,
+          "hint": "2.5 л/сут (1.5–3.3)"
+        }
+      ]
+    },
+    {
+      "id": "swine",
+      "label": "Свиноводство",
+      "emoji": "🐷",
+      "color": "#DB2777",
+      "background": "#FDF2F8",
+      "border": "#FBCFE8",
+      "description": "Свиньи и поросята",
+      "animals": [
+        {
+          "key": "pigs",
+          "label": "Свинья",
+          "avg": 16.0,
+          "min": 13.6,
+          "max": 22.7,
+          "hint": "16 л/сут (13.6–22.7)"
+        },
+        {
+          "key": "piglets",
+          "label": "Поросёнок",
+          "avg": 4.0,
+          "min": 1.0,
+          "max": 10.0,
+          "hint": "4 л/сут (1–10)"
+        }
+      ]
+    },
+    {
+      "id": "poultry",
+      "label": "Птицеводство",
+      "emoji": "🐔",
+      "color": "#CA8A04",
+      "background": "#FEFCE8",
+      "border": "#FEF08A",
+      "description": "Куры и цыплята",
+      "animals": [
+        {
+          "key": "chickens",
+          "label": "Курица",
+          "avg": 0.25,
+          "min": 0.18,
+          "max": 0.32,
+          "hint": "0.25 л/сут (0.18–0.32)"
+        },
+        {
+          "key": "chicks",
+          "label": "Цыплёнок",
+          "avg": 0.15,
+          "min": 0.05,
+          "max": 0.415,
+          "hint": "0.15 л/сут (0.05–0.415)"
+        }
+      ]
+    }
+  ],
+  "site_details": [
+    {
+      "site_id": 1,
+      "title": "Каратау",
+      "district": "Таласский район",
+      "summary": "Предварительный приоритет: Высокий приоритет. Риск: низкий риск, уверенность: высокая уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.72,
+      "priority_band": "Высокий приоритет",
+      "action": "Инспекция в первую очередь",
+      "action_id": "INSPECT_FIRST",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.92,
+          "color": "#22C55E"
+        },
+        {
+          "label": "PNS",
+          "value": 0.76,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.08,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.9,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Глубина выглядит рабочей для предварительной проверки и не перегружает экономику пилота.",
+        "Минерализация не выглядит главным ограничением для водопоя на старте проверки.",
+        "Набор hydro proxy-сигналов выглядит достаточно сильным для shortlist первого круга."
+      ],
+      "caution_reasons": [
+        "Даже сильную точку нельзя трактовать как замену полевой верификации и экспертной оценки."
+      ],
+      "next_steps": [
+        "Включить точку в первый полевой shortlist и проверить её вместе с 1–2 соседними альтернативами.",
+        "Сравнить точку с соседними вариантами в compare/scenario mode, чтобы подтвердить очередность выезда."
+      ],
+      "confidence_note": "High confidence означает только то, что приоритизация выглядит устойчивее по доступным данным; это не подтверждение наличия воды.",
+      "explainability": {
+        "hps": {
+          "score": 0.92,
+          "depth_suitability": 0.95,
+          "tds_suitability": 1.0,
+          "zone_score": 0.78,
+          "nearby_support": 0.9
+        },
+        "pns": {
+          "score": 0.76,
+          "water_access_gap": 0.78,
+          "grazing_pressure": 0.76,
+          "infrastructure_gap": 0.7
+        },
+        "risk": {
+          "score": 0.08,
+          "band": "Низкий риск",
+          "depth_risk": 0.1,
+          "salinity_risk": 0.01,
+          "evidence_gap": 0.1,
+          "signal_conflict": 0.08,
+          "data_gap": 0.12,
+          "stability_risk": 0.17
+        },
+        "confidence": {
+          "score": 0.9,
+          "band": "Высокая уверенность",
+          "data_completeness": 0.88,
+          "signal_balance": 1.0,
+          "nearby_support": 0.9,
+          "signal_conflict": 0.08,
+          "stability_risk": 0.17
+        }
+      }
+    },
+    {
+      "site_id": 2,
+      "title": "Мойынкум",
+      "district": "Мойынкумский район",
+      "summary": "Предварительный приоритет: Средний приоритет. Риск: низкий риск, уверенность: средняя уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.53,
+      "priority_band": "Средний приоритет",
+      "action": "Требуется human review",
+      "action_id": "HUMAN_REVIEW_REQUIRED",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.64,
+          "color": "#EAB308"
+        },
+        {
+          "label": "PNS",
+          "value": 0.73,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.29,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.69,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Глубина выглядит рабочей для предварительной проверки и не перегружает экономику пилота.",
+        "Минерализация не выглядит главным ограничением для водопоя на старте проверки.",
+        "Пастбищная потребность заметна: удалённость от воды делает точку practically relevant."
+      ],
+      "caution_reasons": [
+        "Поблизости мало поддерживающих сигналов, поэтому опора идёт на proxy-данные, а не на сильную локальную проверку."
+      ],
+      "next_steps": [
+        "Перед решением нужен экспертный review входных данных и быстрый sanity-check по району.",
+        "Проверить архивы ближайших скважин в радиусе пилота, чтобы снизить неопределённость по глубине и качеству.",
+        "Сравнить точку с соседними вариантами в compare/scenario mode, чтобы подтвердить очередность выезда."
+      ],
+      "confidence_note": "Medium confidence означает рабочий shortlist-уровень: решение полезно для приоритизации, но должно проверяться в поле.",
+      "explainability": {
+        "hps": {
+          "score": 0.64,
+          "depth_suitability": 0.75,
+          "tds_suitability": 0.8,
+          "zone_score": 0.45,
+          "nearby_support": 0.45
+        },
+        "pns": {
+          "score": 0.73,
+          "water_access_gap": 0.78,
+          "grazing_pressure": 0.74,
+          "infrastructure_gap": 0.62
+        },
+        "risk": {
+          "score": 0.29,
+          "band": "Низкий риск",
+          "depth_risk": 0.25,
+          "salinity_risk": 0.19,
+          "evidence_gap": 0.55,
+          "signal_conflict": 0.36,
+          "data_gap": 0.37,
+          "stability_risk": 0.0
+        },
+        "confidence": {
+          "score": 0.69,
+          "band": "Средняя уверенность",
+          "data_completeness": 0.63,
+          "signal_balance": 1.0,
+          "nearby_support": 0.45,
+          "signal_conflict": 0.36,
+          "stability_risk": 0.0
+        }
+      }
+    },
+    {
+      "site_id": 3,
+      "title": "Жамбыл (центр)",
+      "district": "Тараз",
+      "summary": "Предварительный приоритет: Средний приоритет. Риск: низкий риск, уверенность: высокая уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.64,
+      "priority_band": "Средний приоритет",
+      "action": "Быстрая верификация",
+      "action_id": "INSPECT_WITH_QUICK_VERIFICATION",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.86,
+          "color": "#22C55E"
+        },
+        {
+          "label": "PNS",
+          "value": 0.62,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.11,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.85,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Глубина выглядит рабочей для предварительной проверки и не перегружает экономику пилота.",
+        "Минерализация не выглядит главным ограничением для водопоя на старте проверки.",
+        "Набор hydro proxy-сигналов выглядит достаточно сильным для shortlist первого круга."
+      ],
+      "caution_reasons": [
+        "Даже сильную точку нельзя трактовать как замену полевой верификации и экспертной оценки."
+      ],
+      "next_steps": [
+        "Перед полным выездом сделать быстрый чек по ближайшим скважинам и доступу к участку.",
+        "Сравнить точку с соседними вариантами в compare/scenario mode, чтобы подтвердить очередность выезда."
+      ],
+      "confidence_note": "High confidence означает только то, что приоритизация выглядит устойчивее по доступным данным; это не подтверждение наличия воды.",
+      "explainability": {
+        "hps": {
+          "score": 0.86,
+          "depth_suitability": 0.95,
+          "tds_suitability": 1.0,
+          "zone_score": 0.65,
+          "nearby_support": 0.76
+        },
+        "pns": {
+          "score": 0.62,
+          "water_access_gap": 0.66,
+          "grazing_pressure": 0.64,
+          "infrastructure_gap": 0.48
+        },
+        "risk": {
+          "score": 0.11,
+          "band": "Низкий риск",
+          "depth_risk": 0.1,
+          "salinity_risk": 0.02,
+          "evidence_gap": 0.24,
+          "signal_conflict": 0.15,
+          "data_gap": 0.18,
+          "stability_risk": 0.0
+        },
+        "confidence": {
+          "score": 0.85,
+          "band": "Высокая уверенность",
+          "data_completeness": 0.82,
+          "signal_balance": 0.95,
+          "nearby_support": 0.76,
+          "signal_conflict": 0.15,
+          "stability_risk": 0.0
+        }
+      }
+    },
+    {
+      "site_id": 4,
+      "title": "Шу (р-н)",
+      "district": "Шуский район",
+      "summary": "Предварительный приоритет: Средний приоритет. Риск: низкий риск, уверенность: высокая уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.54,
+      "priority_band": "Средний приоритет",
+      "action": "Требуется human review",
+      "action_id": "HUMAN_REVIEW_REQUIRED",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.72,
+          "color": "#22C55E"
+        },
+        {
+          "label": "PNS",
+          "value": 0.59,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.22,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.8,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Глубина выглядит рабочей для предварительной проверки и не перегружает экономику пилота.",
+        "Минерализация не выглядит главным ограничением для водопоя на старте проверки.",
+        "Набор hydro proxy-сигналов выглядит достаточно сильным для shortlist первого круга."
+      ],
+      "caution_reasons": [
+        "Даже сильную точку нельзя трактовать как замену полевой верификации и экспертной оценки."
+      ],
+      "next_steps": [
+        "Перед решением нужен экспертный review входных данных и быстрый sanity-check по району.",
+        "Сравнить точку с соседними вариантами в compare/scenario mode, чтобы подтвердить очередность выезда."
+      ],
+      "confidence_note": "High confidence означает только то, что приоритизация выглядит устойчивее по доступным данным; это не подтверждение наличия воды.",
+      "explainability": {
+        "hps": {
+          "score": 0.72,
+          "depth_suitability": 0.75,
+          "tds_suitability": 0.8,
+          "zone_score": 0.65,
+          "nearby_support": 0.66
+        },
+        "pns": {
+          "score": 0.59,
+          "water_access_gap": 0.61,
+          "grazing_pressure": 0.62,
+          "infrastructure_gap": 0.5
+        },
+        "risk": {
+          "score": 0.22,
+          "band": "Низкий риск",
+          "depth_risk": 0.25,
+          "salinity_risk": 0.18,
+          "evidence_gap": 0.34,
+          "signal_conflict": 0.22,
+          "data_gap": 0.24,
+          "stability_risk": 0.0
+        },
+        "confidence": {
+          "score": 0.8,
+          "band": "Высокая уверенность",
+          "data_completeness": 0.76,
+          "signal_balance": 1.0,
+          "nearby_support": 0.66,
+          "signal_conflict": 0.22,
+          "stability_risk": 0.0
+        }
+      }
+    },
+    {
+      "site_id": 5,
+      "title": "Мерке",
+      "district": "Меркенский район",
+      "summary": "Предварительный приоритет: Средний приоритет. Риск: низкий риск, уверенность: высокая уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.69,
+      "priority_band": "Средний приоритет",
+      "action": "Быстрая верификация",
+      "action_id": "INSPECT_WITH_QUICK_VERIFICATION",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.91,
+          "color": "#22C55E"
+        },
+        {
+          "label": "PNS",
+          "value": 0.7,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.11,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.86,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Глубина выглядит рабочей для предварительной проверки и не перегружает экономику пилота.",
+        "Минерализация не выглядит главным ограничением для водопоя на старте проверки.",
+        "Набор hydro proxy-сигналов выглядит достаточно сильным для shortlist первого круга."
+      ],
+      "caution_reasons": [
+        "Даже сильную точку нельзя трактовать как замену полевой верификации и экспертной оценки."
+      ],
+      "next_steps": [
+        "Перед полным выездом сделать быстрый чек по ближайшим скважинам и доступу к участку.",
+        "Сравнить точку с соседними вариантами в compare/scenario mode, чтобы подтвердить очередность выезда."
+      ],
+      "confidence_note": "High confidence означает только то, что приоритизация выглядит устойчивее по доступным данным; это не подтверждение наличия воды.",
+      "explainability": {
+        "hps": {
+          "score": 0.91,
+          "depth_suitability": 0.95,
+          "tds_suitability": 1.0,
+          "zone_score": 0.78,
+          "nearby_support": 0.84
+        },
+        "pns": {
+          "score": 0.7,
+          "water_access_gap": 0.72,
+          "grazing_pressure": 0.72,
+          "infrastructure_gap": 0.6
+        },
+        "risk": {
+          "score": 0.11,
+          "band": "Низкий риск",
+          "depth_risk": 0.1,
+          "salinity_risk": 0.02,
+          "evidence_gap": 0.16,
+          "signal_conflict": 0.1,
+          "data_gap": 0.16,
+          "stability_risk": 0.28
+        },
+        "confidence": {
+          "score": 0.86,
+          "band": "Высокая уверенность",
+          "data_completeness": 0.84,
+          "signal_balance": 0.99,
+          "nearby_support": 0.84,
+          "signal_conflict": 0.1,
+          "stability_risk": 0.28
+        }
+      }
+    },
+    {
+      "site_id": 6,
+      "title": "Байзак",
+      "district": "Байзакский район",
+      "summary": "Предварительный приоритет: Средний приоритет. Риск: низкий риск, уверенность: средняя уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.47,
+      "priority_band": "Средний приоритет",
+      "action": "Требуется human review",
+      "action_id": "HUMAN_REVIEW_REQUIRED",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.64,
+          "color": "#EAB308"
+        },
+        {
+          "label": "PNS",
+          "value": 0.56,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.34,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.69,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Глубина выглядит рабочей для предварительной проверки и не перегружает экономику пилота.",
+        "Риск остаётся контролируемым относительно других демонстрационных точек."
+      ],
+      "caution_reasons": [
+        "Часть сигналов конфликтует между собой, поэтому результат нельзя трактовать как устойчивый факт."
+      ],
+      "next_steps": [
+        "Перед решением нужен экспертный review входных данных и быстрый sanity-check по району.",
+        "Сравнить точку с соседними вариантами в compare/scenario mode, чтобы подтвердить очередность выезда."
+      ],
+      "confidence_note": "Medium confidence означает рабочий shortlist-уровень: решение полезно для приоритизации, но должно проверяться в поле.",
+      "explainability": {
+        "hps": {
+          "score": 0.64,
+          "depth_suitability": 0.75,
+          "tds_suitability": 0.55,
+          "zone_score": 0.65,
+          "nearby_support": 0.55
+        },
+        "pns": {
+          "score": 0.56,
+          "water_access_gap": 0.58,
+          "grazing_pressure": 0.57,
+          "infrastructure_gap": 0.52
+        },
+        "risk": {
+          "score": 0.34,
+          "band": "Низкий риск",
+          "depth_risk": 0.25,
+          "salinity_risk": 0.4,
+          "evidence_gap": 0.45,
+          "signal_conflict": 0.42,
+          "data_gap": 0.39,
+          "stability_risk": 0.0
+        },
+        "confidence": {
+          "score": 0.69,
+          "band": "Средняя уверенность",
+          "data_completeness": 0.61,
+          "signal_balance": 1.0,
+          "nearby_support": 0.55,
+          "signal_conflict": 0.42,
+          "stability_risk": 0.0
+        }
+      }
+    },
+    {
+      "site_id": 7,
+      "title": "Кордай",
+      "district": "Кордайский район",
+      "summary": "Предварительный приоритет: Средний приоритет. Риск: средний риск, уверенность: средняя уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.4,
+      "priority_band": "Средний приоритет",
+      "action": "Требуется human review",
+      "action_id": "HUMAN_REVIEW_REQUIRED",
+      "borderline": true,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.52,
+          "color": "#EAB308"
+        },
+        {
+          "label": "PNS",
+          "value": 0.62,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.47,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.6,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Пастбищная потребность заметна: удалённость от воды делает точку practically relevant."
+      ],
+      "caution_reasons": [
+        "Глубина может сделать бурение дороже и снизить practical feasibility для малого хозяйства.",
+        "Поблизости мало поддерживающих сигналов, поэтому опора идёт на proxy-данные, а не на сильную локальную проверку.",
+        "Часть сигналов конфликтует между собой, поэтому результат нельзя трактовать как устойчивый факт."
+      ],
+      "next_steps": [
+        "Перед решением нужен экспертный review входных данных и быстрый sanity-check по району.",
+        "Проверить архивы ближайших скважин в радиусе пилота, чтобы снизить неопределённость по глубине и качеству."
+      ],
+      "confidence_note": "Medium confidence означает рабочий shortlist-уровень: решение полезно для приоритизации, но должно проверяться в поле.",
+      "explainability": {
+        "hps": {
+          "score": 0.52,
+          "depth_suitability": 0.55,
+          "tds_suitability": 0.55,
+          "zone_score": 0.45,
+          "nearby_support": 0.48
+        },
+        "pns": {
+          "score": 0.62,
+          "water_access_gap": 0.66,
+          "grazing_pressure": 0.6,
+          "infrastructure_gap": 0.59
+        },
+        "risk": {
+          "score": 0.47,
+          "band": "Средний риск",
+          "depth_risk": 0.45,
+          "salinity_risk": 0.42,
+          "evidence_gap": 0.52,
+          "signal_conflict": 0.48,
+          "data_gap": 0.42,
+          "stability_risk": 0.63
+        },
+        "confidence": {
+          "score": 0.6,
+          "band": "Средняя уверенность",
+          "data_completeness": 0.58,
+          "signal_balance": 1.0,
+          "nearby_support": 0.48,
+          "signal_conflict": 0.48,
+          "stability_risk": 0.63
+        }
+      }
+    },
+    {
+      "site_id": 8,
+      "title": "Таласский р-н",
+      "district": "Таласский район",
+      "summary": "Предварительный приоритет: Низкий приоритет. Риск: средний риск, уверенность: средняя уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.3,
+      "priority_band": "Низкий приоритет",
+      "action": "Отложить / резерв",
+      "action_id": "DEFER",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.34,
+          "color": "#EF4444"
+        },
+        {
+          "label": "PNS",
+          "value": 0.65,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.59,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.54,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Пастбищная потребность заметна: удалённость от воды делает точку practically relevant."
+      ],
+      "caution_reasons": [
+        "Глубина может сделать бурение дороже и снизить practical feasibility для малого хозяйства.",
+        "Есть риск минерализации: качество воды нужно проверять отдельно, даже если точка выглядит перспективной.",
+        "Поблизости мало поддерживающих сигналов, поэтому опора идёт на proxy-данные, а не на сильную локальную проверку."
+      ],
+      "next_steps": [
+        "Не выводить точку в первый shortlist: оставить её как резерв до уточнения ограничений.",
+        "Запланировать отбор пробы и лабораторную проверку качества воды, если точка сохранится в shortlist.",
+        "Проверить архивы ближайших скважин в радиусе пилота, чтобы снизить неопределённость по глубине и качеству."
+      ],
+      "confidence_note": "Medium confidence означает рабочий shortlist-уровень: решение полезно для приоритизации, но должно проверяться в поле.",
+      "explainability": {
+        "hps": {
+          "score": 0.34,
+          "depth_suitability": 0.35,
+          "tds_suitability": 0.3,
+          "zone_score": 0.45,
+          "nearby_support": 0.28
+        },
+        "pns": {
+          "score": 0.65,
+          "water_access_gap": 0.71,
+          "grazing_pressure": 0.59,
+          "infrastructure_gap": 0.63
+        },
+        "risk": {
+          "score": 0.59,
+          "band": "Средний риск",
+          "depth_risk": 0.68,
+          "salinity_risk": 0.65,
+          "evidence_gap": 0.72,
+          "signal_conflict": 0.62,
+          "data_gap": 0.53,
+          "stability_risk": 0.0
+        },
+        "confidence": {
+          "score": 0.54,
+          "band": "Средняя уверенность",
+          "data_completeness": 0.47,
+          "signal_balance": 0.89,
+          "nearby_support": 0.28,
+          "signal_conflict": 0.62,
+          "stability_risk": 0.0
+        }
+      }
+    },
+    {
+      "site_id": 9,
+      "title": "Луговое / Кулан",
+      "district": "Рыскуловский район",
+      "summary": "Предварительный приоритет: Низкий приоритет. Риск: высокий риск, уверенность: средняя уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.16,
+      "priority_band": "Низкий приоритет",
+      "action": "Не рекомендуется по текущим данным",
+      "action_id": "NOT_RECOMMENDED_CURRENT_EVIDENCE",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.26,
+          "color": "#EF4444"
+        },
+        {
+          "label": "PNS",
+          "value": 0.4,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.67,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.51,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Есть рабочие сигналы для включения в shortlist, но без абсолютной гарантии результата."
+      ],
+      "caution_reasons": [
+        "Глубина может сделать бурение дороже и снизить practical feasibility для малого хозяйства.",
+        "Есть риск минерализации: качество воды нужно проверять отдельно, даже если точка выглядит перспективной.",
+        "Поблизости мало поддерживающих сигналов, поэтому опора идёт на proxy-данные, а не на сильную локальную проверку."
+      ],
+      "next_steps": [
+        "Не выводить точку в первый shortlist: оставить её как резерв до уточнения ограничений.",
+        "Запланировать отбор пробы и лабораторную проверку качества воды, если точка сохранится в shortlist.",
+        "Проверить архивы ближайших скважин в радиусе пилота, чтобы снизить неопределённость по глубине и качеству."
+      ],
+      "confidence_note": "Medium confidence означает рабочий shortlist-уровень: решение полезно для приоритизации, но должно проверяться в поле.",
+      "explainability": {
+        "hps": {
+          "score": 0.26,
+          "depth_suitability": 0.15,
+          "tds_suitability": 0.3,
+          "zone_score": 0.45,
+          "nearby_support": 0.22
+        },
+        "pns": {
+          "score": 0.4,
+          "water_access_gap": 0.34,
+          "grazing_pressure": 0.4,
+          "infrastructure_gap": 0.55
+        },
+        "risk": {
+          "score": 0.67,
+          "band": "Высокий риск",
+          "depth_risk": 0.85,
+          "salinity_risk": 0.71,
+          "evidence_gap": 0.78,
+          "signal_conflict": 0.7,
+          "data_gap": 0.58,
+          "stability_risk": 0.0
+        },
+        "confidence": {
+          "score": 0.51,
+          "band": "Средняя уверенность",
+          "data_completeness": 0.42,
+          "signal_balance": 1.0,
+          "nearby_support": 0.22,
+          "signal_conflict": 0.7,
+          "stability_risk": 0.0
+        }
+      }
+    },
+    {
+      "site_id": 10,
+      "title": "Сарысу / Жанатас",
+      "district": "Сарысуский район",
+      "summary": "Предварительный приоритет: Низкий приоритет. Риск: высокий риск, уверенность: низкая уверенность. Это shortlist для проверки, а не гарантия успешной скважины.",
+      "priority_score": 0.11,
+      "priority_band": "Низкий приоритет",
+      "action": "Не рекомендуется по текущим данным",
+      "action_id": "NOT_RECOMMENDED_CURRENT_EVIDENCE",
+      "borderline": false,
+      "metrics": [
+        {
+          "label": "HPS",
+          "value": 0.15,
+          "color": "#EF4444"
+        },
+        {
+          "label": "PNS",
+          "value": 0.47,
+          "color": "#1E3A8A"
+        },
+        {
+          "label": "Risk",
+          "value": 0.74,
+          "color": "#EF4444"
+        },
+        {
+          "label": "Confidence",
+          "value": 0.45,
+          "color": "#0891B2"
+        }
+      ],
+      "positive_reasons": [
+        "Есть рабочие сигналы для включения в shortlist, но без абсолютной гарантии результата."
+      ],
+      "caution_reasons": [
+        "Глубина может сделать бурение дороже и снизить practical feasibility для малого хозяйства.",
+        "Есть риск минерализации: качество воды нужно проверять отдельно, даже если точка выглядит перспективной.",
+        "Поблизости мало поддерживающих сигналов, поэтому опора идёт на proxy-данные, а не на сильную локальную проверку."
+      ],
+      "next_steps": [
+        "Не выводить точку в первый shortlist: оставить её как резерв до уточнения ограничений.",
+        "Запланировать отбор пробы и лабораторную проверку качества воды, если точка сохранится в shortlist.",
+        "Проверить архивы ближайших скважин в радиусе пилота, чтобы снизить неопределённость по глубине и качеству."
+      ],
+      "confidence_note": "Low confidence означает, что результат чувствителен к неполным или конфликтующим данным и не должен трактоваться как твёрдый вывод.",
+      "explainability": {
+        "hps": {
+          "score": 0.15,
+          "depth_suitability": 0.15,
+          "tds_suitability": 0.05,
+          "zone_score": 0.25,
+          "nearby_support": 0.18
+        },
+        "pns": {
+          "score": 0.47,
+          "water_access_gap": 0.42,
+          "grazing_pressure": 0.46,
+          "infrastructure_gap": 0.61
+        },
+        "risk": {
+          "score": 0.74,
+          "band": "Высокий риск",
+          "depth_risk": 0.85,
+          "salinity_risk": 0.91,
+          "evidence_gap": 0.82,
+          "signal_conflict": 0.74,
+          "data_gap": 0.66,
+          "stability_risk": 0.0
+        },
+        "confidence": {
+          "score": 0.45,
+          "band": "Низкая уверенность",
+          "data_completeness": 0.34,
+          "signal_balance": 0.88,
+          "nearby_support": 0.18,
+          "signal_conflict": 0.74,
+          "stability_risk": 0.0
+        }
+      }
+    }
+  ]
+}

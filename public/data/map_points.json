@@ -1,0 +1,230 @@
+﻿{
+  "stats": [
+    {
+      "label": "Точек проанализировано",
+      "value": "10",
+      "color": "#1E3A8A"
+    },
+    {
+      "label": "Высокий приоритет",
+      "value": "1",
+      "color": "#22C55E"
+    },
+    {
+      "label": "Средний приоритет",
+      "value": "6",
+      "color": "#EAB308"
+    },
+    {
+      "label": "Низкий / рискованный",
+      "value": "3",
+      "color": "#EF4444"
+    }
+  ],
+  "points": [
+    {
+      "id": 1,
+      "name": "Каратау",
+      "district": "Таласский район",
+      "lat": 43.1667,
+      "lon": 70.4667,
+      "depth_m": 12,
+      "tds_gpl": 0.3,
+      "hps": 0.92,
+      "status": "GOOD",
+      "badge": "Высокий приоритет",
+      "pns": 0.76,
+      "risk": 0.08,
+      "confidence": 0.9,
+      "priority_score": 0.72,
+      "action_id": "INSPECT_FIRST"
+    },
+    {
+      "id": 2,
+      "name": "Мойынкум",
+      "district": "Мойынкумский район",
+      "lat": 44.2846,
+      "lon": 72.9374,
+      "depth_m": 28,
+      "tds_gpl": 0.8,
+      "hps": 0.64,
+      "status": "MEDIUM",
+      "badge": "Средний приоритет",
+      "pns": 0.73,
+      "risk": 0.29,
+      "confidence": 0.69,
+      "priority_score": 0.53,
+      "action_id": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": 3,
+      "name": "Жамбыл (центр)",
+      "district": "Тараз",
+      "lat": 42.9004,
+      "lon": 71.3655,
+      "depth_m": 18,
+      "tds_gpl": 0.5,
+      "hps": 0.86,
+      "status": "MEDIUM",
+      "badge": "Средний приоритет",
+      "pns": 0.62,
+      "risk": 0.11,
+      "confidence": 0.85,
+      "priority_score": 0.64,
+      "action_id": "INSPECT_WITH_QUICK_VERIFICATION"
+    },
+    {
+      "id": 4,
+      "name": "Шу (р-н)",
+      "district": "Шуский район",
+      "lat": 43.5983,
+      "lon": 73.7614,
+      "depth_m": 22,
+      "tds_gpl": 0.6,
+      "hps": 0.72,
+      "status": "MEDIUM",
+      "badge": "Средний приоритет",
+      "pns": 0.59,
+      "risk": 0.22,
+      "confidence": 0.8,
+      "priority_score": 0.54,
+      "action_id": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": 5,
+      "name": "Мерке",
+      "district": "Меркенский район",
+      "lat": 42.8708,
+      "lon": 73.1784,
+      "depth_m": 15,
+      "tds_gpl": 0.4,
+      "hps": 0.91,
+      "status": "MEDIUM",
+      "badge": "Средний приоритет",
+      "pns": 0.7,
+      "risk": 0.11,
+      "confidence": 0.86,
+      "priority_score": 0.69,
+      "action_id": "INSPECT_WITH_QUICK_VERIFICATION"
+    },
+    {
+      "id": 6,
+      "name": "Байзак",
+      "district": "Байзакский район",
+      "lat": 42.994,
+      "lon": 71.847,
+      "depth_m": 38,
+      "tds_gpl": 1.5,
+      "hps": 0.64,
+      "status": "MEDIUM",
+      "badge": "Средний приоритет",
+      "pns": 0.56,
+      "risk": 0.34,
+      "confidence": 0.69,
+      "priority_score": 0.47,
+      "action_id": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": 7,
+      "name": "Кордай",
+      "district": "Кордайский район",
+      "lat": 43.0397,
+      "lon": 74.712,
+      "depth_m": 45,
+      "tds_gpl": 1.2,
+      "hps": 0.52,
+      "status": "MEDIUM",
+      "badge": "Средний приоритет",
+      "pns": 0.62,
+      "risk": 0.47,
+      "confidence": 0.6,
+      "priority_score": 0.4,
+      "action_id": "HUMAN_REVIEW_REQUIRED"
+    },
+    {
+      "id": 8,
+      "name": "Таласский р-н",
+      "district": "Таласский район",
+      "lat": 43.3,
+      "lon": 70.9,
+      "depth_m": 62,
+      "tds_gpl": 2.1,
+      "hps": 0.34,
+      "status": "BAD",
+      "badge": "Низкий приоритет",
+      "pns": 0.65,
+      "risk": 0.59,
+      "confidence": 0.54,
+      "priority_score": 0.3,
+      "action_id": "DEFER"
+    },
+    {
+      "id": 9,
+      "name": "Луговое / Кулан",
+      "district": "Рыскуловский район",
+      "lat": 42.9167,
+      "lon": 72.7833,
+      "depth_m": 85,
+      "tds_gpl": 2.8,
+      "hps": 0.26,
+      "status": "BAD",
+      "badge": "Низкий приоритет",
+      "pns": 0.4,
+      "risk": 0.67,
+      "confidence": 0.51,
+      "priority_score": 0.16,
+      "action_id": "NOT_RECOMMENDED_CURRENT_EVIDENCE"
+    },
+    {
+      "id": 10,
+      "name": "Сарысу / Жанатас",
+      "district": "Сарысуский район",
+      "lat": 43.5622,
+      "lon": 69.7404,
+      "depth_m": 91,
+      "tds_gpl": 3.1,
+      "hps": 0.15,
+      "status": "BAD",
+      "badge": "Низкий приоритет",
+      "pns": 0.47,
+      "risk": 0.74,
+      "confidence": 0.45,
+      "priority_score": 0.11,
+      "action_id": "NOT_RECOMMENDED_CURRENT_EVIDENCE"
+    }
+  ],
+  "boundary": [
+    {
+      "lat": 45.55,
+      "lon": 68.95
+    },
+    {
+      "lat": 46.1,
+      "lon": 71.25
+    },
+    {
+      "lat": 45.55,
+      "lon": 74.95
+    },
+    {
+      "lat": 44.45,
+      "lon": 75.8
+    },
+    {
+      "lat": 42.55,
+      "lon": 75.1
+    },
+    {
+      "lat": 42.1,
+      "lon": 73.1
+    },
+    {
+      "lat": 42.15,
+      "lon": 70.1
+    },
+    {
+      "lat": 42.55,
+      "lon": 69.05
+    }
+  ]
+}
