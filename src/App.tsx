@@ -12,7 +12,7 @@ const MapPage = lazy(() => import('@/pages/MapPage').then((module) => ({ default
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })))
 const RankingPage = lazy(() => import('@/pages/RankingPage').then((module) => ({ default: module.RankingPage })))
 const SiteDetailPage = lazy(() => import('@/pages/SiteDetailPage').then((module) => ({ default: module.SiteDetailPage })))
-const ValidationPage = lazy(() => import('@/pages/ValidationPage').then((module) => ({ default: module.ValidationPage })))
+const ValidationPage = lazy(() => import('@/pages/ValidationExperiencePage').then((module) => ({ default: module.ValidationExperiencePage })))
 
 function App() {
   return (
