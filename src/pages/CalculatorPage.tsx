@@ -1,157 +1,193 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Droplets, Save, SlidersHorizontal } from 'lucide-react'
+import { ErrorPanel, LoadingPanel, MetricCard, PageIntro, Panel, SectionTitle } from '@/components/ui'
 import { useSmartPasture } from '@/context/useSmartPasture'
-import { computeCalculatorOutput } from '@/lib/calculator'
-import { formatScore, metricLabel } from '@/lib/labels'
-import { ErrorPanel, LoadingPanel, MetricCard, PageIntro, Panel, ScoreBar, SectionTitle } from '@/components/ui'
-import type { AnimalGroup, ZoneOption } from '@/lib/types'
-import { useI18n } from '@/i18n/useI18n'
-import { localizeAnimalGroup, localizeZoneOption } from '@/i18n/translations'
+import {
+  LIVESTOCK_GROUPS,
+  calculateWaterPlan,
+  loadWaterPlan,
+  saveWaterPlan,
+  type WaterPlan,
+} from '@/lib/waterPlan'
 
-const initialAnimalCounts: Record<string, string> = {
-  cows: '50',
-  sheep: '80',
-  goats: '20',
-  horses: '8',
+function format(value: number, digits = 1) {
+  return new Intl.NumberFormat('ru-RU', { maximumFractionDigits: digits }).format(value)
 }
-const EMPTY_ZONE_OPTIONS: ZoneOption[] = []
-const EMPTY_ANIMAL_GROUPS: AnimalGroup[] = []
+
+function updateRecord(record: Record<string, number>, key: string, value: string) {
+  const number = Number(value)
+  return { ...record, [key]: Number.isFinite(number) && number >= 0 ? number : 0 }
+}
 
 export function CalculatorPage() {
   const { status, data, error } = useSmartPasture()
-  const { language, t } = useI18n()
-  const [locationDepth, setLocationDepth] = useState('30')
-  const [waterTds, setWaterTds] = useState('0.8')
-  const [wellFlowLps, setWellFlowLps] = useState('10')
-  const [animalCounts, setAnimalCounts] = useState<Record<string, string>>(initialAnimalCounts)
-  const [zone, setZone] = useState('')
-  const zoneOptions = useMemo(
-    () => (data?.calculator.zoneOptions ?? EMPTY_ZONE_OPTIONS).map((option) => localizeZoneOption(option, language)),
-    [data?.calculator.zoneOptions, language],
-  )
-  const animalGroups = useMemo(
-    () => (data?.calculator.animalGroups ?? EMPTY_ANIMAL_GROUPS).map((group) => localizeAnimalGroup(group, language)),
-    [data?.calculator.animalGroups, language],
-  )
-  const activeZone = zone || zoneOptions[0]?.value || ''
-  const output = useMemo(
-    () =>
-      computeCalculatorOutput({
-        depthText: locationDepth,
-        tdsText: waterTds,
-        flowText: wellFlowLps,
-        zoneValue: activeZone,
-        zoneOptions,
-        animalGroups,
-        animalCounts,
-        language,
-      }),
-    [activeZone, animalCounts, animalGroups, language, locationDepth, waterTds, wellFlowLps, zoneOptions],
-  )
+  const [plan, setPlan] = useState<WaterPlan>(() => loadWaterPlan())
+  const [savedMessage, setSavedMessage] = useState('')
+  const result = useMemo(() => calculateWaterPlan(plan), [plan])
 
   if (status === 'loading' || !data) {
-    return <LoadingPanel title={t('calculator.loading')} message={t('calculator.loadingMessage')} />
+    return <LoadingPanel title="Калькулятор воды" message="Загружаем точки SmartPasture." />
   }
 
   if (status === 'error') {
-    return <ErrorPanel title={t('common.errorTitle')} message={error ?? t('calculator.error')} />
+    return <ErrorPanel title="Калькулятор воды" message={error ?? 'Не удалось загрузить SmartPasture.'} />
   }
 
-  function updateAnimalCount(key: string, value: string) {
-    setAnimalCounts((current) => ({ ...current, [key]: value }))
+  function persist(selectedSiteId?: number) {
+    const next = { ...plan, selectedSiteId }
+    setPlan(next)
+    saveWaterPlan(next)
+    setSavedMessage(selectedSiteId ? 'Расчёт применён к выбранной точке.' : 'Расчёт сохранён.')
   }
 
   return (
-    <div className="page">
-      <PageIntro eyebrow={t('calculator.eyebrow')} title={t('calculator.title')} subtitle={t('calculator.subtitle')} />
+    <div className="page page--water-calculator">
+      <PageIntro
+        eyebrow="Потребность стада × дебит источника"
+        title="Хватит ли воды моему стаду?"
+        subtitle="Введите предполагаемый дебит и поголовье. SmartPasture посчитает Qneed, Qstock, коэффициент достаточности K и индекс PNS. Нормы можно менять под жару, лактацию и реальные условия хозяйства."
+      />
 
-      <div className="page-grid page-grid--split" data-reveal data-reveal-delay="20">
-        <Panel level="secondary">
-          <SectionTitle title={t('calculator.params')} subtitle={t('calculator.paramsSub')} />
-          <div className="form-grid">
-            <label className="field">
-              <span>{t('calculator.depth')}</span>
-              <input value={locationDepth} onChange={(event) => setLocationDepth(event.target.value)} />
-            </label>
-            <label className="field">
-              <span>{t('calculator.tds')}</span>
-              <input value={waterTds} onChange={(event) => setWaterTds(event.target.value)} />
-            </label>
-            <label className="field">
-              <span>{t('calculator.flow')}</span>
-              <input value={wellFlowLps} onChange={(event) => setWellFlowLps(event.target.value)} />
-            </label>
+      <section className="water-calculator-layout" data-reveal data-reveal-delay="20">
+        <Panel level="secondary" className="water-input-panel">
+          <SectionTitle title="Исходные данные" subtitle="Дебит — сценарное значение до фактического замера скважины." />
+          <label className="field water-flow-field">
+            <span>Предполагаемый дебит скважины <small>л/с</small></span>
+            <input
+              type="number"
+              min="0"
+              step="0.1"
+              inputMode="decimal"
+              value={plan.flowLps}
+              onChange={(event) => setPlan((current) => ({ ...current, flowLps: Math.max(0, Number(event.target.value) || 0) }))}
+            />
+          </label>
+
+          <div className="water-formula-note">
+            <Droplets size={20} />
+            <span>Qstock = дебит × 86 400 / 1000 = <strong>{format(result.qStockM3)} м³/сутки</strong></span>
           </div>
 
-          <SectionTitle title={t('calculator.zone')} subtitle={t('calculator.zoneSub')} />
-          <div className="choice-grid">
-            {zoneOptions.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                className={`choice-card ${activeZone === option.value ? 'choice-card--active' : ''}`}
-                onClick={() => setZone(option.value)}
-              >
-                <strong>{option.label}</strong>
-                <span>{t('common.score')} {formatScore(option.score)}</span>
-              </button>
-            ))}
-          </div>
-        </Panel>
-
-        <Panel>
-          <SectionTitle title={t('calculator.result')} subtitle={t('calculator.resultSub')} />
-          <div className="metric-grid">
-            <MetricCard label={t('common.hps')} value={formatScore(output.hps)} color={output.color} />
-            <MetricCard label={t('calculator.coverage')} value={formatScore(output.coverageRatio)} />
-            <MetricCard label={t('calculator.demand')} value={formatScore(output.totalDemandM3)} />
-            <MetricCard label={t('calculator.capacity')} value={formatScore(output.wellCapacityM3)} />
-          </div>
-
-          <p className="hero-copy">{output.summary}</p>
-
-          <div className="info-rows">
-            <div>
-              <strong>{t('calculator.daily')}</strong>
-              <p>{Math.round(output.totalDemandL)} {t('calculator.lpd')}</p>
-            </div>
-            <div>
-              <strong>{t('calculator.range')}</strong>
-              <p>
-                {Math.round(output.minDemandL)} - {Math.round(output.maxDemandL)} {t('calculator.lpd')}
-              </p>
-            </div>
-          </div>
-
-          <div className="card-stack">
-            <ScoreBar label={metricLabel('Depth', language)} value={output.depthScore} color="#14532d" />
-            <ScoreBar label={metricLabel('TDS', language)} value={output.tdsScore} color="#0f766e" />
-            <ScoreBar label={metricLabel('Zone', language)} value={output.zoneScore} color="#1f9d63" />
-            <ScoreBar label={metricLabel('Flow', language)} value={output.flowScore} color="#2563eb" />
-          </div>
-        </Panel>
-      </div>
-
-      <div className="card-stack" data-reveal data-reveal-delay="70">
-        {animalGroups.map((group) => (
-          <Panel key={group.id} level="minimal">
-            <SectionTitle title={`${group.emoji} ${group.label}`} subtitle={group.description} />
-            <div className="form-grid">
-              {group.animals.map((animal) => (
-                <label key={animal.key} className="field">
-                  <span>
-                    {animal.label}
-                    <small>{animal.hint}</small>
-                  </span>
-                  <input
-                    value={animalCounts[animal.key] ?? '0'}
-                    onChange={(event) => updateAnimalCount(animal.key, event.target.value)}
-                  />
-                </label>
+          <label className="field">
+            <span>Применить к точке на карте</span>
+            <select
+              value={plan.selectedSiteId ?? ''}
+              onChange={(event) => setPlan((current) => ({
+                ...current,
+                selectedSiteId: event.target.value ? Number(event.target.value) : undefined,
+              }))}
+            >
+              <option value="">Без привязки к точке</option>
+              {data.siteDetails.map((site) => (
+                <option key={site.siteId} value={site.siteId}>{site.title} — {site.district}</option>
               ))}
-            </div>
-          </Panel>
-        ))}
-      </div>
+            </select>
+          </label>
+
+          <div className="button-row water-actions">
+            <button type="button" className="button button--secondary" onClick={() => persist()}>
+              <Save size={17} /> Сохранить расчёт
+            </button>
+            <button
+              type="button"
+              className="button button--primary"
+              disabled={!plan.selectedSiteId}
+              onClick={() => persist(plan.selectedSiteId)}
+            >
+              Применить к точке
+            </button>
+          </div>
+          {savedMessage ? <p className="water-save-message" role="status">{savedMessage}</p> : null}
+        </Panel>
+
+        <Panel tone="hero" className={`water-result-panel water-result-panel--${result.verdict}`}>
+          <SectionTitle title="Результат" subtitle="Однозначный вывод по средним нормам, выбранным пользователем." />
+          <div className={`water-verdict water-verdict--${result.verdict}`}>{result.label}</div>
+          <p className="water-result-summary">{result.summary}</p>
+
+          <div className="metric-grid water-metric-grid">
+            <MetricCard label="Qneed" value={format(result.qNeedM3, 2)} helper="м³/сут" color="#22c55e" />
+            <MetricCard label="Qstock" value={format(result.qStockM3, 2)} helper="м³/сут" color="#38bdf8" />
+            <MetricCard label="K = Qstock / Qneed" value={result.totalAnimals ? format(result.k, 2) : '—'} color="#f59e0b" />
+            <MetricCard label="PNS" value={format(result.pns, 2)} helper="0–1" color="#a78bfa" />
+          </div>
+
+          <div className="water-range-card">
+            <strong>Диапазон потребности</strong>
+            <span>{format(result.qNeedMinL, 0)}–{format(result.qNeedMaxL, 0)} л/сутки</span>
+            <small>Минимум и максимум по справочным диапазонам для введённого поголовья.</small>
+          </div>
+
+          {plan.selectedSiteId ? (
+            <Link className="button button--ghost" to={`/site/${plan.selectedSiteId}`}>Открыть выбранную точку</Link>
+          ) : null}
+        </Panel>
+      </section>
+
+      <Panel level="minimal" className="water-livestock-panel" data-reveal data-reveal-delay="60">
+        <SectionTitle
+          title="Поголовье и нормы потребления"
+          subtitle="Количество голов и норма редактируются отдельно. Все значения подписаны в л/сутки на голову."
+        />
+        <div className="water-group-list">
+          {LIVESTOCK_GROUPS.map((group, groupIndex) => (
+            <details key={group.id} className="water-animal-group" open={groupIndex === 0}>
+              <summary>
+                <span>{group.emoji} {group.label}</span>
+                <SlidersHorizontal size={18} />
+              </summary>
+              <div className="water-animal-table">
+                <div className="water-animal-table__head" aria-hidden="true">
+                  <span>Категория</span><span>Голов</span><span>Норма</span>
+                </div>
+                {group.animals.map((animal) => (
+                  <div key={animal.key} className="water-animal-row">
+                    <div className="water-animal-copy">
+                      <strong>{animal.label}</strong>
+                      <small>{animal.defaultValue} л/сутки на голову ({animal.min}–{animal.max}){animal.note ? ` · ${animal.note}` : ''}</small>
+                    </div>
+                    <label>
+                      <span className="sr-only">Количество: {animal.label}</span>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        inputMode="numeric"
+                        value={plan.counts[animal.key] ?? 0}
+                        onChange={(event) => setPlan((current) => ({
+                          ...current,
+                          counts: updateRecord(current.counts, animal.key, event.target.value),
+                        }))}
+                      />
+                      <small>голов</small>
+                    </label>
+                    <label>
+                      <span className="sr-only">Норма: {animal.label}</span>
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        inputMode="decimal"
+                        value={plan.norms[animal.key] ?? animal.defaultValue}
+                        onChange={(event) => setPlan((current) => ({
+                          ...current,
+                          norms: updateRecord(current.norms, animal.key, event.target.value),
+                        }))}
+                      />
+                      <small>л/сут на голову</small>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+      </Panel>
+
+      <p className="water-source-note">
+        Справочные диапазоны взяты из технического задания заказчика. Они предназначены для предварительного планирования и не заменяют ветеринарные, климатические и полевые нормы конкретного хозяйства.
+      </p>
     </div>
   )
 }
