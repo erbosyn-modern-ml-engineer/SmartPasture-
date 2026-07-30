@@ -39,6 +39,11 @@
   line-height: 1.45;
 }
 
+/* The former standalone risk page is now part of ranking; remove its stale CTA. */
+.page--ranking .page-intro__actions a[href='/risk-confidence'] {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .validation-glossary__grid {
     grid-template-columns: minmax(0, 1fr);
