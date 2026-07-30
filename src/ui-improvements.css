@@ -1,0 +1,626 @@
+/* SmartPasture UI/UX improvements — dark-first tokens, calculator and mobile overrides */
+:root,
+:root[data-theme='dark'] {
+  --sp-bg: #07110d;
+  --sp-bg-elevated: #0b1712;
+  --sp-panel: rgba(14, 31, 24, 0.9);
+  --sp-panel-strong: rgba(19, 42, 31, 0.94);
+  --sp-border: rgba(104, 211, 145, 0.22);
+  --sp-border-strong: rgba(74, 222, 128, 0.48);
+  --sp-text: #effbf3;
+  --sp-muted: #a7bdb0;
+  --sp-accent: #4ade80;
+  --sp-accent-strong: #22c55e;
+  --sp-danger: #fb7185;
+  --sp-warning: #fbbf24;
+  --sp-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+}
+
+:root[data-theme='light'] {
+  --sp-bg: #f4f8f5;
+  --sp-bg-elevated: #ffffff;
+  --sp-panel: rgba(255, 255, 255, 0.94);
+  --sp-panel-strong: #ffffff;
+  --sp-border: rgba(22, 101, 52, 0.15);
+  --sp-border-strong: rgba(22, 163, 74, 0.35);
+  --sp-text: #102018;
+  --sp-muted: #5d6f64;
+  --sp-accent: #16a34a;
+  --sp-accent-strong: #15803d;
+  --sp-danger: #dc2626;
+  --sp-warning: #b45309;
+  --sp-shadow: 0 18px 50px rgba(31, 57, 42, 0.11);
+}
+
+html {
+  background: var(--sp-bg);
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(34, 197, 94, 0.11), transparent 34rem),
+    radial-gradient(circle at 92% 8%, rgba(14, 165, 233, 0.08), transparent 30rem),
+    var(--sp-bg);
+  color: var(--sp-text);
+}
+
+.shell,
+.shell__content {
+  color: var(--sp-text);
+}
+
+.app-header--simplified {
+  background: color-mix(in srgb, var(--sp-bg-elevated) 86%, transparent);
+  border-bottom: 1px solid var(--sp-border);
+  backdrop-filter: blur(18px) saturate(130%);
+}
+
+.app-header--simplified .header-nav-link {
+  border-radius: 999px;
+  color: var(--sp-muted);
+}
+
+.app-header--simplified .header-nav-link:hover,
+.app-header--simplified .header-nav-link--active {
+  color: var(--sp-text);
+  background: rgba(74, 222, 128, 0.11);
+  box-shadow: inset 0 0 0 1px var(--sp-border);
+}
+
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--sp-border);
+  border-radius: 14px;
+  color: var(--sp-text);
+  background: var(--sp-panel);
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--sp-border-strong);
+}
+
+:root[data-theme='dark'] .panel,
+:root[data-theme='dark'] [class*='panel'] {
+  --panel-background: var(--sp-panel);
+}
+
+:root[data-theme='dark'] .panel {
+  background: linear-gradient(145deg, rgba(18, 39, 29, 0.94), rgba(8, 21, 15, 0.92));
+  border-color: var(--sp-border);
+  box-shadow: var(--sp-shadow);
+}
+
+:root[data-theme='dark'] .panel[style],
+:root[data-theme='dark'] .metric-card {
+  color: var(--sp-text);
+}
+
+:root[data-theme='dark'] input,
+:root[data-theme='dark'] select,
+:root[data-theme='dark'] textarea {
+  color: var(--sp-text);
+  background: rgba(4, 14, 9, 0.72);
+  border-color: var(--sp-border);
+}
+
+:root[data-theme='dark'] input:focus,
+:root[data-theme='dark'] select:focus,
+:root[data-theme='dark'] textarea:focus {
+  outline: 3px solid rgba(74, 222, 128, 0.16);
+  border-color: var(--sp-border-strong);
+}
+
+.water-calculator-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.water-input-panel,
+.water-result-panel,
+.water-livestock-panel,
+.site-water-panel {
+  border: 1px solid var(--sp-border);
+}
+
+.water-flow-field input {
+  min-height: 58px;
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.water-formula-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  margin: 14px 0 20px;
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  border-radius: 16px;
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--sp-muted);
+}
+
+.water-formula-note svg {
+  color: #38bdf8;
+  flex: 0 0 auto;
+}
+
+.water-actions {
+  margin-top: 18px;
+}
+
+.water-actions .button {
+  min-height: 46px;
+}
+
+.water-save-message {
+  margin: 12px 0 0;
+  color: var(--sp-accent);
+  font-weight: 700;
+}
+
+.water-result-panel {
+  position: sticky;
+  top: 92px;
+  overflow: hidden;
+}
+
+.water-result-panel::after,
+.site-water-panel::after {
+  content: '';
+  position: absolute;
+  inset: auto -12% -45% 35%;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.14), transparent 68%);
+  pointer-events: none;
+}
+
+.water-verdict {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: clamp(0.9rem, 1.6vw, 1.08rem);
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  border: 1px solid currentColor;
+}
+
+.water-verdict--enough {
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.water-verdict--borderline {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.water-verdict--insufficient {
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.12);
+}
+
+.water-verdict--needs_input {
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.water-result-summary {
+  max-width: 64ch;
+  margin: 18px 0;
+  color: var(--sp-text);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.water-metric-grid,
+.site-water-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.water-range-card {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  margin: 18px 0;
+  border-radius: 18px;
+  border: 1px solid var(--sp-border);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.water-range-card span {
+  font-size: 1.25rem;
+  font-weight: 850;
+}
+
+.water-range-card small,
+.water-source-note {
+  color: var(--sp-muted);
+}
+
+.water-livestock-panel {
+  margin-top: 22px;
+}
+
+.water-group-list {
+  display: grid;
+  gap: 12px;
+}
+
+.water-animal-group {
+  overflow: hidden;
+  border: 1px solid var(--sp-border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.water-animal-group summary {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 850;
+  list-style: none;
+}
+
+.water-animal-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.water-animal-group[open] summary {
+  border-bottom: 1px solid var(--sp-border);
+  background: rgba(74, 222, 128, 0.055);
+}
+
+.water-animal-table {
+  display: grid;
+}
+
+.water-animal-table__head,
+.water-animal-row {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.6fr) minmax(110px, 0.55fr) minmax(160px, 0.7fr);
+  gap: 14px;
+  align-items: center;
+  padding: 12px 18px;
+}
+
+.water-animal-table__head {
+  color: var(--sp-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.water-animal-row {
+  border-top: 1px solid color-mix(in srgb, var(--sp-border) 60%, transparent);
+}
+
+.water-animal-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.water-animal-copy small,
+.water-animal-row label small {
+  color: var(--sp-muted);
+  line-height: 1.35;
+}
+
+.water-animal-row label {
+  display: grid;
+  gap: 4px;
+}
+
+.water-animal-row input {
+  min-height: 44px;
+  width: 100%;
+  font-weight: 750;
+}
+
+.water-source-note {
+  max-width: 88ch;
+  margin: 16px auto 0;
+  text-align: center;
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.site-water-panel {
+  position: relative;
+  overflow: hidden;
+  margin-top: 22px;
+}
+
+.site-water-panel__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.site-water-panel__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #38bdf8;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.site-water-panel__summary,
+.site-water-panel__capacity {
+  position: relative;
+  z-index: 1;
+  line-height: 1.65;
+}
+
+.site-water-panel__capacity {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(56, 189, 248, 0.07);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.site-water-warning {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  margin: 18px 0;
+  border-radius: 16px;
+  color: var(--sp-warning);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.24);
+}
+
+.validation-user-warning {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  border-radius: 18px;
+  background: rgba(245, 158, 11, 0.08);
+  color: var(--sp-text);
+}
+
+.validation-user-warning strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--sp-warning);
+}
+
+.app-footer {
+  border-top-color: var(--sp-border);
+  background: color-mix(in srgb, var(--sp-bg-elevated) 88%, transparent);
+}
+
+.nav-drawer {
+  background: var(--sp-bg-elevated);
+  border-left: 1px solid var(--sp-border);
+}
+
+@media (max-width: 1120px) {
+  .app-header__nav {
+    display: none;
+  }
+
+  .menu-button--mobile {
+    display: inline-grid;
+  }
+}
+
+@media (max-width: 768px) {
+  .water-calculator-layout,
+  .site-brief-grid,
+  .page-grid--split,
+  .ranking-workspace,
+  .validation-dashboard-grid,
+  .compare-top-grid,
+  .compare-site-grid,
+  .compare-analysis-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .water-result-panel {
+    position: static;
+  }
+
+  .map-frame,
+  .ranking-map-frame,
+  .validation-map-frame {
+    width: 100%;
+    height: 50vh !important;
+    min-height: 360px;
+  }
+
+  .button-row {
+    flex-wrap: wrap;
+  }
+
+  .button-row > .button,
+  .button-row > button,
+  .site-brief-panel__actions > *,
+  .compare-conclusion-panel__actions > * {
+    flex: 1 1 220px;
+  }
+
+  input[type='range'] {
+    min-height: 44px;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    width: 28px;
+    height: 28px;
+  }
+
+  .table-like__row {
+    min-height: 52px;
+  }
+
+  .validation-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 640px) {
+  .shell__content {
+    padding-inline: 14px;
+    padding-bottom: 94px;
+  }
+
+  .brand-lockup__text small {
+    display: none;
+  }
+
+  .language-switcher--desktop {
+    display: none;
+  }
+
+  .theme-toggle,
+  .language-switcher-mobile__toggle,
+  .menu-button--mobile,
+  .icon-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .metric-grid,
+  .water-metric-grid,
+  .site-water-metrics,
+  .ranking-kpi-grid,
+  .validation-kpi-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .water-animal-table__head {
+    display: none;
+  }
+
+  .water-animal-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .water-animal-row label {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .water-animal-row label small {
+    max-width: 120px;
+    text-align: right;
+  }
+
+  .water-animal-row input {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+
+  .water-actions,
+  .site-water-panel__heading {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .water-actions .button,
+  .site-water-panel .button,
+  .site-brief-panel__actions .button,
+  .compare-conclusion-panel__actions .button {
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  .water-verdict {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .map-frame,
+  .ranking-map-frame,
+  .validation-map-frame {
+    height: 50vh !important;
+    min-height: 300px;
+    border-radius: 16px;
+  }
+
+  .ranking-filter-grid,
+  .form-grid,
+  .choice-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .ranking-preset-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .table-like {
+    display: grid;
+    gap: 8px;
+  }
+
+  .table-like__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 5px;
+    padding: 13px 14px;
+    border: 1px solid var(--sp-border);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .table-like__row strong {
+    text-align: left;
+  }
+
+  .app-mobile-nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background: color-mix(in srgb, var(--sp-bg-elevated) 94%, transparent);
+    border-top: 1px solid var(--sp-border);
+    backdrop-filter: blur(18px);
+  }
+
+  .app-mobile-nav__item {
+    min-height: 64px;
+    font-size: 0.72rem;
+  }
+
+  .app-footer {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

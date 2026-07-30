@@ -1,0 +1,51 @@
+.validation-experience {
+  display: grid;
+  gap: 18px;
+}
+
+.validation-glossary {
+  margin-bottom: 4px;
+}
+
+.validation-glossary__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.validation-glossary__grid > div {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 13px 14px;
+  border: 1px solid var(--sp-border);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.validation-glossary__grid svg {
+  flex: 0 0 auto;
+  color: #38bdf8;
+  margin-top: 2px;
+}
+
+.validation-glossary__grid span {
+  display: grid;
+  gap: 4px;
+}
+
+.validation-glossary__grid small {
+  color: var(--sp-muted);
+  line-height: 1.45;
+}
+
+/* The former standalone risk page is now part of ranking; remove its stale CTA. */
+.page--ranking .page-intro__actions a[href='/risk-confidence'] {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .validation-glossary__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,14 +1,16 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 import {
   BarChart3,
-  ClipboardList,
-  Globe,
+  Calculator,
+  FileText,
   GitCompareArrows,
+  Globe,
   Home,
   ListFilter,
   Map,
   Menu,
-  ShieldAlert,
+  Moon,
+  Sun,
   X,
 } from 'lucide-react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
@@ -23,25 +25,31 @@ import { LANGUAGES, type Language } from '@/i18n/translations'
 
 type NavigationItem = {
   to: string
-  labelKey?: string
-  label?: string
+  label: string
   icon: typeof Home
   end?: boolean
 }
 
+type Theme = 'dark' | 'light'
+
+const THEME_KEY = 'smartpasture-theme'
+
 const primaryNavigation: NavigationItem[] = [
-  { to: '/', labelKey: 'nav.home', icon: Home, end: true },
-  { to: '/map', labelKey: 'nav.map', icon: Map },
-  { to: '/ranking', label: 'Рейтинг', icon: ListFilter },
-  { to: '/risk-confidence', label: 'Риски', icon: ShieldAlert },
-  { to: '/validation', label: 'Проверка', icon: BarChart3 },
-  { to: '/compare', labelKey: 'nav.compare', icon: GitCompareArrows },
-  { to: '/scenarios', labelKey: 'nav.scenarios', icon: ClipboardList },
+  { to: '/', label: 'Главная', icon: Home, end: true },
+  { to: '/map', label: 'Карта', icon: Map },
+  { to: '/ranking', label: 'Точки', icon: ListFilter },
+  { to: '/calculator', label: 'Калькулятор', icon: Calculator },
+  { to: '/validation', label: 'Валидация', icon: BarChart3 },
+  { to: '/compare', label: 'Сравнить', icon: GitCompareArrows },
+  { to: '/report', label: 'Отчёт', icon: FileText },
 ]
 
-const mobileNavigation: NavigationItem[] = primaryNavigation.filter((item) => (
-  item.to === '/' || item.to === '/map' || item.to === '/ranking' || item.to === '/risk-confidence'
-))
+const mobileNavigation = primaryNavigation.slice(0, 4)
+
+function readTheme(): Theme {
+  if (typeof window === 'undefined') return 'dark'
+  return window.localStorage.getItem(THEME_KEY) === 'light' ? 'light' : 'dark'
+}
 
 export function AppShell() {
   const location = useLocation()
@@ -54,6 +62,7 @@ export function AppShell() {
   const revealKey = `${location.pathname}:${status}`
   const [menuState, setMenuState] = useState({ open: false, locationKey: '' })
   const [languageMenuState, setLanguageMenuState] = useState({ open: false, locationKey: '' })
+  const [theme, setTheme] = useState<Theme>(() => readTheme())
   const firstMenuLinkRef = useRef<HTMLAnchorElement | null>(null)
   const menuButtonRef = useRef<HTMLButtonElement | null>(null)
   const drawerRef = useRef<HTMLElement | null>(null)
@@ -62,7 +71,7 @@ export function AppShell() {
   const isLanguageMenuOpen = languageMenuState.open && languageMenuState.locationKey === languageLocationKey
   const closeMenu = () => setMenuState({ open: false, locationKey: '' })
   const closeLanguageMenu = () => setLanguageMenuState({ open: false, locationKey: '' })
-  const compactFooterRoutes = ['/map', '/ranking', '/risk-confidence']
+  const compactFooterRoutes = ['/map', '/ranking', '/calculator']
   const compactFooter = compactFooterRoutes.some((route) => location.pathname.startsWith(route))
   const toggleMenu = () => {
     setMenuState((current) => (
@@ -82,15 +91,18 @@ export function AppShell() {
   useRevealOnScroll(contentRef, revealKey)
 
   useEffect(() => {
-    if (!menuOpen) {
-      return
-    }
+    document.documentElement.dataset.theme = theme
+    document.documentElement.style.colorScheme = theme
+    window.localStorage.setItem(THEME_KEY, theme)
+  }, [theme])
+
+  useEffect(() => {
+    if (!menuOpen) return
 
     const previousFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
     const menuButtonElement = menuButtonRef.current
     const previousBodyOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-
     firstMenuLinkRef.current?.focus()
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -99,26 +111,21 @@ export function AppShell() {
         return
       }
 
-      if (event.key === 'Tab') {
-        const focusableElements = drawerRef.current?.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        )
+      if (event.key !== 'Tab') return
+      const focusableElements = drawerRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )
+      if (!focusableElements || focusableElements.length === 0) return
 
-        if (!focusableElements || focusableElements.length === 0) {
-          return
-        }
-
-        const first = focusableElements[0]
-        const last = focusableElements[focusableElements.length - 1]
-        const activeElement = document.activeElement
-
-        if (event.shiftKey && activeElement === first) {
-          event.preventDefault()
-          last.focus()
-        } else if (!event.shiftKey && activeElement === last) {
-          event.preventDefault()
-          first.focus()
-        }
+      const first = focusableElements[0]
+      const last = focusableElements[focusableElements.length - 1]
+      const activeElement = document.activeElement
+      if (event.shiftKey && activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && activeElement === last) {
+        event.preventDefault()
+        first.focus()
       }
     }
 
@@ -131,35 +138,26 @@ export function AppShell() {
   }, [menuOpen])
 
   useEffect(() => {
-    if (!isLanguageMenuOpen) {
-      return
-    }
+    if (!isLanguageMenuOpen) return
 
     const handlePointerDown = (event: MouseEvent) => {
-      if (!languageMenuRef.current?.contains(event.target as Node)) {
-        closeLanguageMenu()
-      }
+      if (!languageMenuRef.current?.contains(event.target as Node)) closeLanguageMenu()
     }
-
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        closeLanguageMenu()
-      }
+      if (event.key === 'Escape') closeLanguageMenu()
     }
 
     document.addEventListener('mousedown', handlePointerDown)
     document.addEventListener('keydown', handleEscape)
-
     return () => {
       document.removeEventListener('mousedown', handlePointerDown)
       document.removeEventListener('keydown', handleEscape)
     }
   }, [isLanguageMenuOpen])
 
-
   return (
     <div className={cx('shell', menuOpen && 'shell--menu-open')}>
-      <header className="app-header">
+      <header className="app-header app-header--simplified">
         <NavLink to="/" className="brand-lockup" aria-label="SmartPasture">
           <img className="brand-lockup__logo" src={smartPastureLogo} alt="" />
           <span className="brand-lockup__text">
@@ -177,12 +175,22 @@ export function AppShell() {
               className={({ isActive }) => cx('header-nav-link', isActive && 'header-nav-link--active')}
             >
               <item.icon size={16} />
-              <span>{item.label ?? (item.labelKey ? t(item.labelKey) : '')}</span>
+              <span>{item.label}</span>
             </NavLink>
           ))}
         </nav>
 
         <div className="app-header__right">
+          <button
+            type="button"
+            className="theme-toggle"
+            aria-label={theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'}
+            title={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
+            onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
           <div className="language-switcher language-switcher--desktop" aria-label={t('nav.languageSwitcher')}>
             {LANGUAGES.map((item) => (
               <button
@@ -268,7 +276,7 @@ export function AppShell() {
             <img className="brand-lockup__logo" src={smartPastureLogo} alt="" />
             <span className="brand-lockup__text">
               <strong>{t('app.title')}</strong>
-              <small>Предполевой гидрогеологический скрининг</small>
+              <small>Что делать дальше — в одном меню</small>
             </span>
           </div>
           <button type="button" className="icon-button" aria-label={t('nav.closeMenu')} onClick={closeMenu}>
@@ -287,12 +295,10 @@ export function AppShell() {
               className={({ isActive }) => cx('drawer-link', isActive && 'drawer-link--active')}
             >
               <item.icon size={19} />
-              <span>{item.label ?? (item.labelKey ? t(item.labelKey) : '')}</span>
+              <span>{item.label}</span>
             </NavLink>
           ))}
         </nav>
-
-
       </aside>
 
       <main ref={contentRef} className="shell__content">
@@ -310,14 +316,14 @@ export function AppShell() {
             {!compactFooter ? <img src={smartPastureLogo} alt="SmartPasture" className="app-footer__logo" /> : null}
             <div>
               <strong>SmartPasture</strong>
-              <div>Инструмент поддержки решений для гидрогеологических служб</div>
+              <div>Предварительный инструмент поддержки решений, не гарантия наличия воды.</div>
               <div className="app-footer__copyright">© 2026 SmartPasture. Все права защищены.</div>
             </div>
           </div>
           <div className="app-footer__links">
-            <NavLink to="/">Главная</NavLink>
-            <NavLink to="/ranking">Рейтинг</NavLink>
-            <NavLink to="/validation">Проверка</NavLink>
+            <NavLink to="/calculator">Калькулятор</NavLink>
+            <NavLink to="/validation">Валидация</NavLink>
+            <NavLink to="/report">Отчёт</NavLink>
           </div>
         </div>
       </footer>
@@ -331,7 +337,7 @@ export function AppShell() {
             className={({ isActive }) => cx('app-mobile-nav__item', isActive && 'app-mobile-nav__item--active')}
           >
             <item.icon size={20} />
-            <span>{item.label ?? (item.labelKey ? t(item.labelKey) : '')}</span>
+            <span>{item.label}</span>
           </NavLink>
         ))}
       </nav>
