@@ -129,8 +129,8 @@ export function CalculatorPage() {
           subtitle="Количество голов и норма редактируются отдельно. Все значения подписаны в л/сутки на голову."
         />
         <div className="water-group-list">
-          {LIVESTOCK_GROUPS.map((group, groupIndex) => (
-            <details key={group.id} className="water-animal-group" defaultOpen={groupIndex === 0}>
+          {LIVESTOCK_GROUPS.map((group) => (
+            <details key={group.id} className="water-animal-group">
               <summary>
                 <span>{group.emoji} {group.label}</span>
                 <SlidersHorizontal size={18} />
