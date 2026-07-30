@@ -132,7 +132,7 @@ export function CalculatorPage() {
         />
         <div className="water-group-list">
           {LIVESTOCK_GROUPS.map((group, groupIndex) => (
-            <details key={group.id} className="water-animal-group" open={groupIndex === 0}>
+            <details key={group.id} className="water-animal-group" defaultOpen={groupIndex === 0}>
               <summary>
                 <span>{group.emoji} {group.label}</span>
                 <SlidersHorizontal size={18} />
