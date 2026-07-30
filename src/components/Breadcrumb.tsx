@@ -11,84 +11,42 @@ type BreadcrumbProps = {
 }
 
 function formatSegment(segment: string): string {
-  if (!segment) {
-    return ''
-  }
-
+  if (!segment) return ''
   const normalized = segment.replace(/-/g, ' ').trim()
-  if (!normalized) {
-    return ''
-  }
-
+  if (!normalized) return ''
   return normalized.charAt(0).toUpperCase() + normalized.slice(1)
 }
 
 function buildAutoItems(pathname: string, siteId: string | undefined, t: (key: string) => string): BreadcrumbItem[] {
-  if (pathname === '/' || pathname === '/map') {
-    return []
-  }
+  if (pathname === '/' || pathname === '/map') return []
 
   if (pathname.startsWith('/site/')) {
     const siteLabel = siteId ? `${t('breadcrumb.site')} #${siteId}` : t('breadcrumb.site')
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: siteLabel },
-    ]
-  }
-
-  if (pathname.startsWith('/compare')) {
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: t('nav.compare') },
-    ]
-  }
-
-  if (pathname.startsWith('/scenarios')) {
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: t('nav.scenarios') },
-    ]
-  }
-
-  if (pathname.startsWith('/validation')) {
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: 'Проверка' },
-    ]
+    return [{ label: 'Карта', to: '/map' }, { label: siteLabel }]
   }
 
   if (pathname.startsWith('/ranking')) {
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: 'Рейтинг точек' },
-    ]
-  }
-
-  if (pathname.startsWith('/risk-confidence')) {
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: 'Риск и уверенность' },
-    ]
+    return [{ label: 'Карта', to: '/map' }, { label: 'Точки и ранжирование' }]
   }
 
   if (pathname.startsWith('/calculator')) {
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: t('nav.calculator') },
-    ]
+    return [{ label: 'Карта', to: '/map' }, { label: 'Калькулятор воды' }]
   }
 
-  if (pathname.startsWith('/knowledge') || pathname.startsWith('/methodology') || pathname.startsWith('/appendix/methodology')) {
-    return [
-      { label: t('nav.map'), to: '/map' },
-      { label: t('help.howScoringTitle') },
-    ]
+  if (pathname.startsWith('/validation')) {
+    return [{ label: 'Карта', to: '/map' }, { label: 'Валидация модели' }]
+  }
+
+  if (pathname.startsWith('/compare')) {
+    return [{ label: 'Карта', to: '/map' }, { label: 'Сравнить точки' }]
+  }
+
+  if (pathname.startsWith('/report')) {
+    return [{ label: 'Главная', to: '/' }, { label: 'Отчёт и методология' }]
   }
 
   const segments = pathname.split('/').filter(Boolean)
-  if (segments.length <= 1) {
-    return []
-  }
+  if (segments.length <= 1) return []
 
   return [
     { label: t('nav.home'), to: '/' },
@@ -100,13 +58,9 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
   const location = useLocation()
   const { siteId } = useParams()
   const { t } = useI18n()
+  const breadcrumbItems = items ?? buildAutoItems(location.pathname, siteId, t)
 
-  const autoItems = buildAutoItems(location.pathname, siteId, t)
-  const breadcrumbItems = items ?? autoItems
-
-  if (breadcrumbItems.length <= 1) {
-    return null
-  }
+  if (breadcrumbItems.length <= 1) return null
 
   return (
     <nav className="breadcrumb" aria-label={t('breadcrumb.ariaLabel')}>
