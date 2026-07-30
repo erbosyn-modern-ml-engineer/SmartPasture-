@@ -34,11 +34,9 @@ export function CalculatorPage() {
     return <ErrorPanel title="Калькулятор воды" message={error ?? 'Не удалось загрузить SmartPasture.'} />
   }
 
-  function persist(selectedSiteId?: number) {
-    const next = { ...plan, selectedSiteId }
-    setPlan(next)
-    saveWaterPlan(next)
-    setSavedMessage(selectedSiteId ? 'Расчёт применён к выбранной точке.' : 'Расчёт сохранён.')
+  function persist(message: string) {
+    saveWaterPlan(plan)
+    setSavedMessage(message)
   }
 
   return (
@@ -86,14 +84,14 @@ export function CalculatorPage() {
           </label>
 
           <div className="button-row water-actions">
-            <button type="button" className="button button--secondary" onClick={() => persist()}>
+            <button type="button" className="button button--secondary" onClick={() => persist('Расчёт сохранён.')}>
               <Save size={17} /> Сохранить расчёт
             </button>
             <button
               type="button"
               className="button button--primary"
               disabled={!plan.selectedSiteId}
-              onClick={() => persist(plan.selectedSiteId)}
+              onClick={() => persist('Расчёт применён к выбранной точке.')}
             >
               Применить к точке
             </button>
