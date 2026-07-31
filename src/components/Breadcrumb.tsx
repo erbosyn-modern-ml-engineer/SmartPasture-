@@ -33,10 +33,6 @@ function buildAutoItems(pathname: string, siteId: string | undefined, t: (key: s
     return [{ label: 'Карта', to: '/map' }, { label: 'Калькулятор воды' }]
   }
 
-  if (pathname.startsWith('/validation')) {
-    return [{ label: 'Карта', to: '/map' }, { label: 'Валидация модели' }]
-  }
-
   if (pathname.startsWith('/compare')) {
     return [{ label: 'Карта', to: '/map' }, { label: 'Сравнить точки' }]
   }

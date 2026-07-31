@@ -1,5 +1,6 @@
 import { AlertTriangle } from 'lucide-react'
 import { EmptyState, MetricCard, Panel, Pill, SectionTitle } from '@/components/ui'
+import { featureFlags } from '@/lib/featureFlags'
 import {
   mlPredictionColor,
   mlPredictionLabel,
@@ -75,6 +76,10 @@ export function ClassicMlPanel({
   compact?: boolean
   title?: string
 }) {
+  if (!featureFlags.experimentalMlUi) {
+    return null
+  }
+
   if (loading) {
     return (
       <Panel level="minimal" className="classic-ml-panel classic-ml-panel--loading">

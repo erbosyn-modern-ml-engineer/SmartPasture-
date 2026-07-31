@@ -1,6 +1,5 @@
 import { Suspense, useEffect, useRef, useState } from 'react'
 import {
-  BarChart3,
   Calculator,
   FileText,
   GitCompareArrows,
@@ -39,7 +38,6 @@ const primaryNavigation: NavigationItem[] = [
   { to: '/map', label: 'Карта', icon: Map },
   { to: '/ranking', label: 'Точки', icon: ListFilter },
   { to: '/calculator', label: 'Калькулятор', icon: Calculator },
-  { to: '/validation', label: 'Валидация', icon: BarChart3 },
   { to: '/compare', label: 'Сравнить', icon: GitCompareArrows },
   { to: '/report', label: 'Отчёт', icon: FileText },
 ]
@@ -322,7 +320,7 @@ export function AppShell() {
           </div>
           <div className="app-footer__links">
             <NavLink to="/calculator">Калькулятор</NavLink>
-            <NavLink to="/validation">Валидация</NavLink>
+            <NavLink to="/compare">Сравнить</NavLink>
             <NavLink to="/report">Отчёт</NavLink>
           </div>
         </div>

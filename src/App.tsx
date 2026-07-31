@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppShell } from '@/components/AppShell'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { featureFlags } from '@/lib/featureFlags'
 
 const CalculatorPage = lazy(() => import('@/pages/CalculatorPage').then((module) => ({ default: module.CalculatorPage })))
 const ComparePage = lazy(() => import('@/pages/ComparePage').then((module) => ({ default: module.ComparePage })))
@@ -25,10 +26,19 @@ function App() {
           <Route path="/ranking" element={<RankingPage />} />
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/compare" element={<ComparePage />} />
-          <Route path="/validation" element={<ValidationPage />} />
           <Route path="/site/:siteId" element={<SiteDetailPage />} />
-          <Route path="/gis-probe" element={<GisProbePage />} />
           <Route path="/report" element={<KnowledgePage />} />
+
+          {/* Experimental ML screens stay in the repository but are closed for public users. */}
+          <Route
+            path="/validation"
+            element={featureFlags.experimentalMlUi ? <ValidationPage /> : <Navigate to="/ranking" replace />}
+          />
+          <Route
+            path="/gis-probe"
+            element={featureFlags.experimentalMlUi ? <GisProbePage /> : <Navigate to="/ranking" replace />}
+          />
+
           <Route path="/knowledge" element={<Navigate to="/report" replace />} />
           <Route path="/methodology" element={<Navigate to="/report" replace />} />
           <Route path="/appendix/methodology" element={<Navigate to="/report" replace />} />

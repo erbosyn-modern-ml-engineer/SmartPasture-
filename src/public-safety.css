@@ -1,0 +1,6 @@
+/* Public builds must not expose experimental ML validation entry points. */
+a[href="/validation"],
+a[href="/risk-confidence"],
+a[href="/gis-probe"] {
+  display: none !important;
+}
